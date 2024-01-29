@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 html {
@@ -17,6 +18,7 @@ body {
   line-height: 1;
   font-weight: 400;
   color: #555;
+  overflow-x: hidden;
 }
 
 /********************/
@@ -26,7 +28,7 @@ body {
 .main-nav-list {
   list-style: none;
   display: flex;
-  gap: 3.2rem;
+  gap: 4.8rem;
 }
 
 .main-nav-list a:link,
@@ -43,19 +45,33 @@ body {
 }
 
 /********************/
+/* Mobile */
+/********************/
+
+.btn-mobile-nav {
+  border: none;
+  background: none;
+  color: #333;
+  display: none;
+}
+
+.icon-mobile-nav {
+  height: 4.8rem;
+  width: 4.8rem;
+  color: #333;
+}
+
+.icon-mobile-nav[name="close-outline"] {
+  display: none;
+}
+
+/********************/
 /* Hero Section */
 /********************/
 
 .section-hero {
   background-color: #fdf2e9;
   padding: 4.8rem 0 9.6rem 0;
-  max-height: calc(100vh - 9.6rem);
-}
-
-@media (max-width: 1200px) {
-  .section-hero {
-    background-color: #51cf66;
-  }
 }
 
 .hero {
@@ -540,7 +556,6 @@ body {
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   border-radius: 11px;
   background-image: linear-gradient(to right bottom, #eb984e, #e67e22);
-  height: 50rem;
   overflow: hidden;
 }
 
