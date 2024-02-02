@@ -22,3 +22,15 @@
 @import "layout/navigation";
 
 @import "pages/home";
+
+@include respond(tab-lend) {
+}
+
+@include respond(tab-port) {
+}
+
+@include respond(phone) {
+}
+
+@include respond(big-desktop) {
+}
