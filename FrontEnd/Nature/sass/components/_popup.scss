@@ -21,16 +21,29 @@
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
     transition: all 0.4s 0.2s;
+    @include respond(tab-port) {
+      display: block;
+    }
   }
 
   &__left {
     width: 33.33333%;
     display: table-cell;
+
+    @include respond(tab-port) {
+      width: 100%;
+      display: block;
+      padding: 0;
+    }
   }
 
   &__img {
     display: block;
     width: 100%;
+    @include respond(tab-port) {
+      display: inline-block;
+      width: 49.5%;
+    }
   }
 
   &__right {
@@ -38,6 +51,12 @@
     display: table-cell;
     vertical-align: middle;
     padding: 3rem 5rem;
+
+    @include respond(tab-port) {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
   }
 
   &__text {
