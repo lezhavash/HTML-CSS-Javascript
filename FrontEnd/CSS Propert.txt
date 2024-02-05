@@ -8,3 +8,4 @@ shape-outside
 ::input-placeholder
 :focus, :invalid,
 placeholder-shown and :checked 
+caret-color
