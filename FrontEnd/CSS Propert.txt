@@ -9,4 +9,5 @@ shape-outside
 :focus, :invalid,
 placeholder-shown and :checked 
 caret-color
-cubic-bezier
+cubic-bezier ანიმაციის შემოსვლა გსვლის სიჩქარე
+mask-image
