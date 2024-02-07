@@ -1,7 +1,7 @@
 //////////LOGO
 .logo {
   height: 3.25rem;
-  margin-left: 2 rem;
+  margin-left: 2rem;
 }
 
 ////////SearchBox
@@ -10,6 +10,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 31.25em) {
+    order: 1;
+    flex: 0 0 100%;
+    background-color: var(--color-Grey-light-2);
+  }
 
   &__input {
     font-family: inherit;
@@ -118,11 +124,23 @@
   list-style: none;
   margin-top: 3.5rem;
 
+  @media only screen and (max-width: 56.25em) {
+    display: flex;
+    margin: 0;
+  }
+
   &__item {
     position: relative;
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
+      @media only screen and (max-width: 56.25em) {
+        margin: 0;
+      }
+    }
+
+    @media only screen and (max-width: 56.25em) {
+      flex: 1;
     }
 
     &--active {
@@ -163,6 +181,17 @@
     align-items: center;
     z-index: 100;
     position: relative;
+
+    @media only screen and (max-width: 56.25em) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.5rem;
+    }
   }
 
   &__icon {
@@ -170,6 +199,12 @@
     width: 1.75rem;
     height: 1.75rem;
     margin-right: 2rem;
+
+    @media only screen and (max-width: 37.5em) {
+      margin-right: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
@@ -178,6 +213,10 @@
   color: var(--color-Grey-light-4);
   text-align: center;
   padding: 2.5rem;
+
+  @media only screen and (max-width: 56.25em) {
+    display: none;
+  }
 }
 
 ///////Gallery
@@ -195,12 +234,18 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--color-Grey-light-2);
+
   &__heading {
     font-size: 2.25rem;
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
+
+    @media only screen and (max-width: 37.5em) {
+      font-size: 1.8rem;
+      padding: 1rem 1.5rem;
+    }
   }
 
   &__stars {
@@ -259,8 +304,17 @@
   cursor: pointer;
   transition: all 0.2s;
 
+  & span {
+    margin-left: 3px;
+    transition: all 0.2s;
+  }
+
   &:hover {
     color: var(--color-Grey-dark-1);
+  }
+
+  &:hover span {
+    margin-left: 8px;
   }
 
   &:focus {
@@ -330,9 +384,6 @@
     margin-right: auto;
   }
 
-  &__friends {
-  }
-
   &__photo {
     box-sizing: content-box;
     height: 4rem;
@@ -343,5 +394,142 @@
     &:not(last-child) {
       margin-right: -1.15rem;
     }
+  }
+}
+
+///////Review
+.review {
+  background-color: #fff;
+  box-shadow: var(--shedow-light);
+  padding: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+
+  @media only screen and (max-width: 56.25em) {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__text {
+    margin-bottom: 2rem;
+    z-index: 1000;
+    position: relative;
+  }
+
+  &__user {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__photo {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 100%;
+    margin-right: 1.5rem;
+  }
+
+  &__user-box {
+    margin-right: auto;
+  }
+  &__user-name {
+    font-size: 1.1;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  &__user-date {
+    font-size: 1rem;
+    color: var(--color-Grey-dark-3);
+  }
+  &__reiting {
+    font-size: 2.25rem;
+    color: var(--color-primary);
+    font-weight: 300;
+  }
+
+  &::before {
+    content: "\201c";
+    font-family: sans-serif;
+    line-height: 1;
+    position: absolute;
+    top: -1.3rem;
+    left: -1rem;
+    font-size: 20rem;
+    color: var(--color-Grey-light-2);
+    z-index: 10;
+  }
+}
+
+///////CTA
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  @media only screen and (max-width: 56.25em) {
+    padding: 2rem 0;
+  }
+
+  &__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: 300;
+  border: none;
+  border-radius: 100px;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-light),
+    var(--color-primary-dark)
+  );
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &__visible {
+    display: inline-block;
+    padding: 2rem 7.5rem;
+    transition: all 0.2s;
+  }
+
+  &__hidden {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -100%;
+    padding: 2rem;
+    height: 100%;
+    width: 100%;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-image: linear-gradient(
+      to left,
+      var(--color-primary-light),
+      var(--color-primary-dark)
+    );
+  }
+
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
+  }
+
+  &:hover &__visible {
+    transform: translateY(100%);
+  }
+
+  &:hover &__hidden {
+    transform: translateY(100%);
   }
 }
