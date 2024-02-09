@@ -3,11 +3,51 @@
     background-color: $color-primary;
     grid-row: 3 / 4;
     grid-column: 2 / 7;
+    background-image: linear-gradient(
+        rgba($color-primary, 0.5),
+        rgba($color-primary, 0.5)
+      ),
+      url(../img/back.jpg);
+
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+  }
+
+  &__img {
+    &--1 {
+      width: 100%;
+      display: block;
+      grid-row: 2 / 6;
+      grid-column: 2 / 6;
+      box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.1);
+    }
+
+    &--2 {
+      width: 115%;
+      display: block;
+      grid-row: 4 / 6;
+      grid-column: 4 / 7;
+      z-index: 20;
+      box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+    }
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     background-color: $color-grey-light-1;
     grid-row: 3 / 4;
     grid-column: 7 / -1;
+    padding: 6rem 8vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 4rem;
   }
 }
