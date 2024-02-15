@@ -19,3 +19,6 @@ if (marksBMIData1 > johnBMIData1) {
 } else {
   console.log(`johns ${johnBMIData1} is more then marks`);
 }
+
+let height;
+console.log(typeof height);
