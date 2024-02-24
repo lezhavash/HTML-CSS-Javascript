@@ -1,3 +1,5 @@
+`use strict`;
+
 // let marksWeightData1 = 78;
 // let marksTallData1 = 1.69;
 // let johnWeightData1 = 92;
@@ -46,16 +48,5 @@
 //   console.log(`Nowan winns`);
 // }
 
-// let height;
-// console.log(typeof height);
-
-let temp = [17, 21, 13];
-let printForecast = function (temp) {
-  let text = "";
-  for (let i = 0; i < temp.length; i++) {
-    text += `${temp[i]}C  in day ${i + 1} ...`;
-  }
-  console.log("... " + text);
-};
-
-printForecast(temp);
+let height;
+console.log(typeof height);
