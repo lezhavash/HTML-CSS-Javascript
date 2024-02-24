@@ -51,18 +51,6 @@
 // let height;
 // console.log(typeof height);
 
-<<<<<<< HEAD
-let temp = [17, 21, 13];
-let printForecast = function (temp) {
-  let text = "";
-  for (let i = 0; i < temp.length; i++) {
-    text += `${temp[i]}C  in day ${i + 1} ...`;
-  }
-  console.log("... " + text);
-};
-
-printForecast(temp);
-=======
 // let bill = 430;
 // let tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 // console.log(`The bill was ${bill}, the tip ${tip}, and total ${bill + tip}`);
@@ -134,31 +122,41 @@ printForecast(temp);
 //   );
 // }
 
-let bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
-let tips = [];
-let total = [];
-let calcTip = function (bill) {
-  if (bill >= 50 && bill <= 300) {
-    tips.push(bill * 0.15);
-  } else {
-    tips.push(bill * 0.2);
+// let bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+// let tips = [];
+// let total = [];
+// let calcTip = function (bill) {
+//   if (bill >= 50 && bill <= 300) {
+//     tips.push(bill * 0.15);
+//   } else {
+//     tips.push(bill * 0.2);
+//   }
+// };
+
+// for (let i = 0; i < bills.length; i++) {
+//   calcTip(bills[i]);
+//   total[i] = bills[i] + tips[i];
+// }
+
+// console.log(bills, tips, total);
+
+// let calcAverage = function (arr) {
+//   let sum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     sum += arr[i];
+//   }
+//   return sum / arr.length;
+// };
+
+// console.log(calcAverage(total));
+
+let temp = [17, 21, 13];
+let printForecast = function (temp) {
+  let text = "";
+  for (let i = 0; i < temp.length; i++) {
+    text += `${temp[i]}C  in day ${i + 1} ...`;
   }
+  console.log("... " + text);
 };
 
-for (let i = 0; i < bills.length; i++) {
-  calcTip(bills[i]);
-  total[i] = bills[i] + tips[i];
-}
-
-console.log(bills, tips, total);
-
-let calcAverage = function (arr) {
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    sum += arr[i];
-  }
-  return sum / arr.length;
-};
-
-console.log(calcAverage(total));
->>>>>>> 1c997e3b2c6806d4280769ee4a21f3a2ea021527
+printForecast(temp);
