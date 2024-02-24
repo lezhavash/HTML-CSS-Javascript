@@ -20,31 +20,42 @@
 //   console.log(`johns ${johnBMIData1} is more then marks`);
 // }
 
-const delphineScore1 = 100;
-const delphineScore2 = 100;
-const delphineScore3 = 100;
-const delphineAverage = (delphineScore1 + delphineScore2 + delphineScore3) / 3;
+// const delphineScore1 = 100;
+// const delphineScore2 = 100;
+// const delphineScore3 = 100;
+// const delphineAverage = (delphineScore1 + delphineScore2 + delphineScore3) / 3;
 
-const koalaScore1 = 100;
-const koalaScore2 = 100;
-const koalaScore3 = 100;
-const koalaAverage = (koalaScore1 + koalaScore2 + koalaScore3) / 3;
+// const koalaScore1 = 100;
+// const koalaScore2 = 100;
+// const koalaScore3 = 100;
+// const koalaAverage = (koalaScore1 + koalaScore2 + koalaScore3) / 3;
 
-if (delphineAverage >= 100 || koalaAverage >= 100) {
-  if (delphineAverage > koalaAverage) {
-    console.log(`Delphine team winnes`);
-  } else if (delphineAverage < koalaAverage) {
-    console.log(`Koala team winnes`);
-  } else if (
-    delphineAverage === koalaAverage &&
-    delphineAverage >= 100 &&
-    koalaAverage >= 100
-  ) {
-    console.log(`Both winn s`);
+// if (delphineAverage >= 100 || koalaAverage >= 100) {
+//   if (delphineAverage > koalaAverage) {
+//     console.log(`Delphine team winnes`);
+//   } else if (delphineAverage < koalaAverage) {
+//     console.log(`Koala team winnes`);
+//   } else if (
+//     delphineAverage === koalaAverage &&
+//     delphineAverage >= 100 &&
+//     koalaAverage >= 100
+//   ) {
+//     console.log(`Both winn s`);
+//   }
+// } else {
+//   console.log(`Nowan winns`);
+// }
+
+// let height;
+// console.log(typeof height);
+
+let temp = [17, 21, 13];
+let printForecast = function (temp) {
+  let text = "";
+  for (let i = 0; i < temp.length; i++) {
+    text += `${temp[i]}C  in day ${i + 1} ...`;
   }
-} else {
-  console.log(`Nowan winns`);
-}
+  console.log("... " + text);
+};
 
-let height;
-console.log(typeof height);
+printForecast(temp);
