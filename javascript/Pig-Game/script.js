@@ -11,6 +11,8 @@ const btnhold = document.querySelector(".btn--hold");
 const current0 = document.getElementById("current--0");
 const current1 = document.getElementById("current--1");
 
+let currentScore, activePlayer, playing, scores;
+
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
   currentScore = 0;
@@ -19,13 +21,23 @@ const switchPlayer = function () {
   player1.classList.toggle("player--active");
 };
 
-diceEL.classList.add("hidden");
-score0EL.textContent = 0;
-score1EL.textContent = 0;
-let currentScore = 0;
-let activePlayer = 0;
-const scores = [0, 0];
-let playing = true;
+const init = function () {
+  diceEL.classList.add("hidden");
+  score0EL.textContent = 0;
+  score1EL.textContent = 0;
+  currentScore = 0;
+  activePlayer = 0;
+  scores = [0, 0];
+  playing = true;
+  current0.textContent = 0;
+  current1.textContent = 0;
+  player0.classList.remove("player--winner");
+  player1.classList.remove("player--winner");
+  player1.classList.remove("player--active");
+  player0.classList.add("player--active");
+};
+
+init();
 
 btnroll.addEventListener("click", function () {
   if (playing) {
@@ -48,7 +60,7 @@ btnhold.addEventListener("click", function () {
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       playing = false;
       diceEL.classList.add("hidden");
       document
@@ -63,22 +75,4 @@ btnhold.addEventListener("click", function () {
   }
 });
 
-btnhnew.addEventListener("click", function () {
-  score0EL.textContent = 0;
-  score1EL.textContent = 0;
-  current0.textContent = 0;
-  current1.textContent = 0;
-  currentScore = 0;
-  scores[0] = 0;
-  scores[1] = 0;
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.remove("player--winner");
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.remove("player--active");
-
-  document.querySelector(`.player--0`).classList.add("player--active");
-  playing = true;
-  diceEL.classList.remove("hidden");
-});
+btnhnew.addEventListener("click", init);
