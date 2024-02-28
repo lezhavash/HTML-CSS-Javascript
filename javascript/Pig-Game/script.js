@@ -69,7 +69,8 @@ btnhnew.addEventListener("click", function () {
   current0.textContent = 0;
   current1.textContent = 0;
   currentScore = 0;
-  scores = [0, 0];
+  scores[0] = 0;
+  scores[1] = 0;
   document
     .querySelector(`.player--${activePlayer}`)
     .classList.remove("player--winner");
