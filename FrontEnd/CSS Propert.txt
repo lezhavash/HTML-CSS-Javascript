@@ -1,0 +1,13 @@
+outline-offset
+backface-visibility
+box-decoration-break
+background-blend-mode
+background-clip -ტექსტზე გადმოვა ბექგრაუნდი
+clip-path
+shape-outside
+::input-placeholder
+:focus, :invalid,
+placeholder-shown and :checked 
+caret-color
+cubic-bezier ანიმაციის შემოსვლა გსვლის სიჩქარე
+mask-image

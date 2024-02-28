@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Carusel Component</title>
+  </head>
+  <body>
+    <div class="carusel">
+      <img src="maria.jpg" alt="Maria" />
+      <blockquote class="testimonial">
+        <p class="testimonial-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+          delectus harum officia enim aliquam nemo, laborum optio prro minus,
+          consectetur aut sunt odio dolorem repellat dolore excepturi,
+          perferendis quisquam nesciunt.
+        </p>
+        <p class="testimonial-autor">Maria de Almeida</p>
+        <p class="testimonial-job">Senior Project Manager at EDp Comercial</p>
+      </blockquote>
+      <button class="btn left">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="btn-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
+      <button class="btn right">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="btn-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
+      <div class="dots">
+        <button class="dot active">&nbsp;</button>
+        <button class="dot">&nbsp;</button>
+        <button class="dot">&nbsp;</button>
+        <button class="dot">&nbsp;</button>
+      </div>
+    </div>
+  </body>
+</html>
