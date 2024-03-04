@@ -76,10 +76,18 @@ const allPlayers = [...player1, ...player2];
 const player1Final = ["Tiago", "Coutinho", "Perisic", ...player1];
 const { team1, team2, x: drow } = odds;
 const printGoals = function (...players) {
-  console.log(...players);
+  for (const item of players) console.log(item);
   console.log(players.length);
 };
 printGoals(...scored);
-
 team1 < team2 && console.log("Winner Team1");
 team1 > team2 && console.log("Winner Team2");
+
+for (const [goal, goaleScored] of scored.entries()) {
+  console.log(`Goal ${goal + 1}: ${goaleScored}`);
+}
+console.log(scored);
+console.log(odds);
+
+for (const [num, value] of odds.entries()) {
+}
