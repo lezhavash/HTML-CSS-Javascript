@@ -68,3 +68,18 @@ const game = {
     team2: 6.5,
   },
 };
+
+const { players, odds, scored } = game;
+const [player1, player2] = players;
+const [gk, ...fieldPlayers] = player1;
+const allPlayers = [...player1, ...player2];
+const player1Final = ["Tiago", "Coutinho", "Perisic", ...player1];
+const { team1, team2, x: drow } = odds;
+const printGoals = function (...players) {
+  console.log(...players);
+  console.log(players.length);
+};
+printGoals(...scored);
+
+team1 < team2 && console.log("Winner Team1");
+team1 > team2 && console.log("Winner Team2");
