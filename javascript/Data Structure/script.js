@@ -86,8 +86,30 @@ team1 > team2 && console.log("Winner Team2");
 for (const [goal, goaleScored] of scored.entries()) {
   console.log(`Goal ${goal + 1}: ${goaleScored}`);
 }
-console.log(scored);
-console.log(odds);
 
-for (const [num, value] of odds.entries()) {
+const value = Object.values(odds);
+const key = Object.keys(odds);
+const entries = Object.entries(odds);
+
+let average = 0;
+for (const odd of value) {
+  average += odd;
 }
+average /= key.length;
+console.log(average);
+console.log(entries);
+
+for (const [key, value] of entries) {
+  const teamWin = key === "x" ? "drow" : `${game[key]}`;
+  console.log(`Odd of victory ${teamWin}: ${value}`);
+}
+const scorers = {};
+for (const player of scored) {
+  if (scorers[player]) {
+    scorers[player]++;
+  } else {
+    scorers[player] = 1;
+  }
+}
+
+console.log(scorers);
