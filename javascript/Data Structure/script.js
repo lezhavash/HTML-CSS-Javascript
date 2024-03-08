@@ -69,6 +69,32 @@ const game = {
   },
 };
 
+const gameEvents = new Map([
+  [17, "⚽ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽ GOAL"],
+  [80, "⚽ GOAL"],
+  [92, "🔶 Yellow card"],
+]);
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+gameEvents.delete(64);
+const time = [...gameEvents.keys()];
+const last = time[time.length - 1];
+let avrg = last / gameEvents.size;
+console.log(`An event happened,on average, every ${avrg} minutes`);
+for (let [time, event] of gameEvents) {
+  const t = time >= 45 ? "Secent" : "Fitst";
+  console.log(`[${t} Time] ${time}: ${event}`);
+}
+
 const { players, odds, scored } = game;
 const [player1, player2] = players;
 const [gk, ...fieldPlayers] = player1;
@@ -111,5 +137,20 @@ for (const player of scored) {
     scorers[player] = 1;
   }
 }
-
 console.log(scorers);
+
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+
+let text = document.querySelector("textarea").value;
+let btn = document.querySelector("button");
+btn.addEventListener("click", function () {
+  let text = document.querySelector("textarea").value;
+  const line = text.split("\n");
+  console.log(line);
+  for (const [i, r] of line.entries()) {
+    const [one, two] = r.toLowerCase().trim().split("_");
+    const done = `${one}${two[0].toUpperCase() + two.split(1)}`;
+    console.log(`${done.padEnd(20)} ${"✅".repeat(i + 1)}`);
+  }
+});
