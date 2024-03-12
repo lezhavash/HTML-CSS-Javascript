@@ -71,32 +71,32 @@
 
 ///////
 
-const lufthansa = {
-  airline: "Lufthansa",
-  iataCode: "LH",
-  bookings: [],
-  // book: function() {}
-  book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-    );
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
-  },
-};
+// const lufthansa = {
+//   airline: "Lufthansa",
+//   iataCode: "LH",
+//   bookings: [],
+//   // book: function() {}
+//   book(flightNum, name) {
+//     console.log(
+//       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//     );
+//     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+//   },
+// };
 
-lufthansa.book(239, "Jonas Schmedtmann");
-lufthansa.book(635, "John Smith");
+// lufthansa.book(239, "Jonas Schmedtmann");
+// lufthansa.book(635, "John Smith");
 
-const book = lufthansa.book;
+// const book = lufthansa.book;
 
-const eurowings = {
-  airline: "Eurowings",
-  iataCode: "EW",
-  bookings: [],
-  book,
-};
+// const eurowings = {
+//   airline: "Eurowings",
+//   iataCode: "EW",
+//   bookings: [],
+//   book,
+// };
 
-eurowings.book(233, "Shota Lezhava");
+// eurowings.book(233, "Shota Lezhava");
 
 // book.call(eurowings, 23, "Sarah Williams");
 // console.log(eurowings);
@@ -119,12 +119,18 @@ eurowings.book(233, "Shota Lezhava");
 
 // book.call(swiss, ...flightData);
 
-lufthansa.planes = 300;
-lufthansa.buyPlans = function () {
-  this.planes++;
-  console.log(this.planes);
-};
+// lufthansa.planes = 300;
+// lufthansa.buyPlans = function () {
+//   this.planes++;
+//   console.log(this.planes);
+// };
 
-document
-  .querySelector(".buy")
-  .addEventListener("click", lufthansa.buyPlans.bind(lufthansa));
+// document
+//   .querySelector(".buy")
+//   .addEventListener("click", lufthansa.buyPlans.bind(lufthansa));
+
+const poll = {
+  question: "What is your favourite programming language?",
+  options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+  // This generates [0, 0, 0, 0]. More in the next section! answers: new Array(4).fill(0),
+};
