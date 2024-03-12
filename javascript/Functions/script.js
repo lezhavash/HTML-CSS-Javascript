@@ -87,31 +87,44 @@ const lufthansa = {
 lufthansa.book(239, "Jonas Schmedtmann");
 lufthansa.book(635, "John Smith");
 
+const book = lufthansa.book;
+
 const eurowings = {
   airline: "Eurowings",
   iataCode: "EW",
   bookings: [],
+  book,
 };
 
-const book = lufthansa.book;
+eurowings.book(233, "Shota Lezhava");
 
-book.call(eurowings, 23, "Sarah Williams");
-console.log(eurowings);
+// book.call(eurowings, 23, "Sarah Williams");
+// console.log(eurowings);
 
-book.call(lufthansa, 239, "Mary Cooper");
-console.log(lufthansa);
+// book.call(lufthansa, 239, "Mary Cooper");
+// console.log(lufthansa);
 
-const swiss = {
-  airline: "Swiss Air Lines",
-  iataCode: "LX",
-  bookings: [],
+// const swiss = {
+//   airline: "Swiss Air Lines",
+//   iataCode: "LX",
+//   bookings: [],
+// };
+
+// book.call(swiss, 583, "Mary Cooper");
+
+// // Apply method
+// const flightData = [583, "George Cooper"];
+// book.apply(swiss, flightData);
+// console.log(swiss);
+
+// book.call(swiss, ...flightData);
+
+lufthansa.planes = 300;
+lufthansa.buyPlans = function () {
+  this.planes++;
+  console.log(this.planes);
 };
 
-book.call(swiss, 583, "Mary Cooper");
-
-// Apply method
-const flightData = [583, "George Cooper"];
-book.apply(swiss, flightData);
-console.log(swiss);
-
-book.call(swiss, ...flightData);
+document
+  .querySelector(".buy")
+  .addEventListener("click", lufthansa.buyPlans.bind(lufthansa));
