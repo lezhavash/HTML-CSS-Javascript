@@ -178,3 +178,8 @@ const booker = secureBooking();
 booker();
 booker();
 booker();
+
+(function () {
+  const header = document.querySelector("h1");
+  header.style.color = "red";
+})();
