@@ -165,21 +165,25 @@
 // poll.displayResults.call({ answers: [5, 2, 3] }, "string");
 /////
 
-const secureBooking = function () {
-  let passengerCount = 0;
+// const secureBooking = function () {
+//   let passengerCount = 0;
 
-  return function () {
-    passengerCount++;
-    console.log(`${passengerCount} passenger`);
-  };
-};
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passenger`);
+//   };
+// };
 
-const booker = secureBooking();
-booker();
-booker();
-booker();
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+//////
 
 (function () {
   const header = document.querySelector("h1");
   header.style.color = "red";
+  document.querySelector("body").addEventListener("click", function () {
+    header.style.color = "blue";
+  });
 })();
