@@ -1,5 +1,31 @@
 "use strict";
 
+const checkDogs = function (arr1, arr2) {
+  arr1 = julia.slice(1, -1);
+  arr2 = kate.slice(1, -1);
+
+  const dogs = arr1.concat(arr2);
+  dogs.forEach(function (age, dog) {
+    if (age > 3) {
+      console.log(`Dog Number ${dog + 1} is ${age} yers old and adult`);
+    } else {
+      console.log(`Dog Number ${dog + 1} is  ${age} yers old and still puppy`);
+    }
+  });
+};
+
+const julia = [3, 5, 2, 12, 7];
+const kate = [4, 1, 15, 8, 3];
+
+checkDogs(julia, kate);
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUsd = 1.1;
+const movementsUSD = movements.map((mov) => mov * euroToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -71,7 +97,7 @@ const currencies = new Map([
   ["GBP", "Pound sterling"],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -103,3 +129,15 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+
+createUsernames(accounts);
