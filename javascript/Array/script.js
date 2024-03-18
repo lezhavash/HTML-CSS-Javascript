@@ -1,48 +1,55 @@
 "use strict";
 
-const checkDogs = function (arr1, arr2) {
-  arr1 = julia.slice(1, -1);
-  arr2 = kate.slice(1, -1);
+// const checkDogs = function (arr1, arr2) {
+//   arr1 = julia.slice(1, -1);
+//   arr2 = kate.slice(1, -1);
 
-  const dogs = arr1.concat(arr2);
-  dogs.forEach(function (age, dog) {
-    if (age > 3) {
-      console.log(`Dog Number ${dog + 1} is ${age} yers old and adult`);
-    } else {
-      console.log(`Dog Number ${dog + 1} is  ${age} yers old and still puppy`);
-    }
-  });
-};
+//   const dogs = arr1.concat(arr2);
+//   dogs.forEach(function (age, dog) {
+//     if (age > 3) {
+//       console.log(`Dog Number ${dog + 1} is ${age} yers old and adult`);
+//     } else {
+//       console.log(`Dog Number ${dog + 1} is  ${age} yers old and still puppy`);
+//     }
+//   });
+// };
 
-const julia = [3, 5, 2, 12, 7];
-const kate = [4, 1, 15, 8, 3];
+// const julia = [3, 5, 2, 12, 7];
+// const kate = [4, 1, 15, 8, 3];
 
-checkDogs(julia, kate);
+// checkDogs(julia, kate);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const euroToUsd = 1.1;
-const movementsUSD = movements.map((mov) => mov * euroToUsd);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const euroToUsd = 1.1;
+// const movementsUSD = movements.map((mov) => mov * euroToUsd);
 
-console.log(movements);
-console.log(movementsUSD);
+// console.log(movements);
+// console.log(movementsUSD);
+
+// const calcAverageHumanAge = function (arr) {
+//   const humanAge = arr.map(function (mov) {
+//     if (mov <= 2) {
+//       return mov * 2;
+//     } else {
+//       return 16 + mov * 4;
+//     }
+//   });
+
+//   const adult = humanAge.filter((age) => age > 18);
+
+//   const avrg =
+//     adult.reduce(function (avrg, mov) {
+//       return avrg + mov;
+//     }, 0) / adult.length;
+
+//   return avrg;
+// };
 
 const calcAverageHumanAge = function (arr) {
-  const humanAge = arr.map(function (mov) {
-    if (mov <= 2) {
-      return mov * 2;
-    } else {
-      return 16 + mov * 4;
-    }
-  });
-
-  const adult = humanAge.filter((age) => age > 18);
-  console.log(adult);
-
-  const avrg =
-    adult.reduce(function (avrg, mov) {
-      return avrg + mov;
-    }, 0) / adult.length;
-
+  const avrg = arr
+    .map((mov) => (mov <= 2 ? mov * 2 : 16 + mov * 4))
+    .filter((age) => age > 18)
+    .reduce((acc, mov, i, arr) => acc + mov / arr.length, 0);
   return avrg;
 };
 
@@ -160,6 +167,28 @@ const calcDisplaytBalance = function (movements) {
 
 calcDisplaytBalance(account1.movements);
 
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes} EUR`;
+
+  const out = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(out)} EUR`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * 1.2) / 100)
+    .filter((int) => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest} EUR`;
+};
+calcDisplaySummary(account1.movements);
+
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -171,3 +200,15 @@ const createUsernames = function (accs) {
 };
 
 createUsernames(accounts);
+
+//////
+
+let currentAccount;
+
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+});
