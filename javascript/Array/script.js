@@ -26,6 +26,29 @@ const movementsUSD = movements.map((mov) => mov * euroToUsd);
 console.log(movements);
 console.log(movementsUSD);
 
+const calcAverageHumanAge = function (arr) {
+  const humanAge = arr.map(function (mov) {
+    if (mov <= 2) {
+      return mov * 2;
+    } else {
+      return 16 + mov * 4;
+    }
+  });
+
+  const adult = humanAge.filter((age) => age > 18);
+  console.log(adult);
+
+  const avrg =
+    adult.reduce(function (avrg, mov) {
+      return avrg + mov;
+    }, 0) / adult.length;
+
+  return avrg;
+};
+
+const data1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+console.log(data1);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -129,6 +152,13 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+const calcDisplaytBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplaytBalance(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
