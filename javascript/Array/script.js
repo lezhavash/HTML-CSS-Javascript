@@ -358,9 +358,45 @@ console.log(
 
 ///3
 
-const eatToMuch = dogs
+const ownersEatTooMuch = dogs
   .filter((dog) => dog.curFood > dog.recommendedFood)
   .map((own) => own.owners)
   .flat();
 
-console.log(eatToMuch);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recommendedFood)
+  .map((own) => own.owners)
+  .flat();
+
+console.log(ownersEatTooLittle);
+
+///4
+console.log(`${ownersEatTooMuch.join(" and ")}'s dogs eat to much`);
+console.log(`${ownersEatTooLittle.join(" and ")}'s dogs eat to little`);
+
+///5
+const eatWell = dogs.some((dog) => dog.curFood === dog.recommendedFood);
+console.log(eatWell);
+
+///6
+
+const eatOk = dogs.some(
+  (dog) =>
+    dog.curFood > dog.recommendedFood * 0.9 &&
+    dog.curFood < dog.recommendedFood * 1.1
+);
+console.log(eatOk);
+
+///7
+
+const dogsEatOk = dogs.filter(
+  (dog) =>
+    dog.curFood > dog.recommendedFood * 0.9 &&
+    dog.curFood < dog.recommendedFood * 1.1
+);
+
+console.log(dogsEatOk);
+
+////8
