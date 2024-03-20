@@ -45,16 +45,57 @@
 //   return avrg;
 // };
 
-const calcAverageHumanAge = function (arr) {
-  const avrg = arr
-    .map((mov) => (mov <= 2 ? mov * 2 : 16 + mov * 4))
-    .filter((age) => age > 18)
-    .reduce((acc, mov, i, arr) => acc + mov / arr.length, 0);
-  return avrg;
-};
+// const calcAverageHumanAge = function (arr) {
+//   const avrg = arr
+//     .map((mov) => (mov <= 2 ? mov * 2 : 16 + mov * 4))
+//     .filter((age) => age > 18)
+//     .reduce((acc, mov, i, arr) => acc + mov / arr.length, 0);
+//   return avrg;
+// };
 
-const data1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-console.log(data1);
+// const data1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// console.log(data1);
+
+// const bankDepositSum = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov > 0)
+//   .reduce((sum, cur) => sum + cur, 0);
+// console.log(bankDepositSum);
+
+// const numDeposits1000 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov >= 1000).length;
+// console.log(numDeposits1000);
+
+// const numDeposits100 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+// console.log(numDeposits100);
+
+// const sums = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       cur > 0 ? (sums.deposit += cur) : (sums.withdrowals += cur);
+//       return sums;
+//     },
+//     { deposit: 0, withdrowals: 0 }
+//   );
+// console.log(sums);
+
+// const convertTitleCase = function (title) {
+//   const capitalize = (str) => str[0]?.toUpperCase() + str.slice(1);
+
+//   const expections = ["a", "an", "the", "but", "or", "on", "in", "with"];
+//   const titleCase = title
+//     .toLowerCase()
+//     .split(" ")
+//     .map((word) => (expections.includes(word) ? word : capitalize(word)))
+//     .join(" ");
+//   return capitalize(titleCase);
+// };
+
+// console.log(convertTitleCase("and it is a nice in sadasd title"));
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -293,50 +334,33 @@ btnSort.addEventListener("click", function (e) {
 
 /////////
 
-const bankDepositSum = accounts
-  .flatMap((acc) => acc.movements)
-  .filter((mov) => mov > 0)
-  .reduce((sum, cur) => sum + cur, 0);
-console.log(bankDepositSum);
-
-const numDeposits1000 = accounts
-  .flatMap((acc) => acc.movements)
-  .filter((mov) => mov >= 1000).length;
-console.log(numDeposits1000);
-
-const numDeposits100 = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
-console.log(numDeposits100);
-
-const sums = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce(
-    (sums, cur) => {
-      cur > 0 ? (sums.deposit += cur) : (sums.withdrowals += cur);
-      return sums;
-    },
-    { deposit: 0, withdrowals: 0 }
-  );
-console.log(sums);
-
-const convertTitleCase = function (title) {
-  const capitalize = (str) => str[0]?.toUpperCase() + str.slice(1);
-
-  const expections = ["a", "an", "the", "but", "or", "on", "in", "with"];
-  const titleCase = title
-    .toLowerCase()
-    .split(" ")
-    .map((word) => (expections.includes(word) ? word : capitalize(word)))
-    .join(" ");
-  return capitalize(titleCase);
-};
-
-console.log(convertTitleCase("and it is a nice in sadasd title"));
-
 const dogs = [
   { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
   { weight: 8, curFood: 200, owners: ["Matilda"] },
   { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
   { weight: 32, curFood: 340, owners: ["Michael"] },
 ];
+
+/////1
+dogs.forEach(function (dog) {
+  dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28);
+});
+
+console.log(dogs);
+
+///2
+const serah = dogs.find((dog) => dog.owners.includes("Sarah"));
+console.log(
+  `Dog ${
+    dogs.curFood > dogs.recommendedFood ? "eats to much" : "eats too little"
+  }`
+);
+
+///3
+
+const eatToMuch = dogs
+  .filter((dog) => dog.curFood > dog.recommendedFood)
+  .map((own) => own.owners)
+  .flat();
+
+console.log(eatToMuch);
