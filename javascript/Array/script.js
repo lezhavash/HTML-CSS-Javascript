@@ -400,3 +400,7 @@ const dogsEatOk = dogs.filter(
 console.log(dogsEatOk);
 
 ////8
+const dogSort = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(dogSort);
