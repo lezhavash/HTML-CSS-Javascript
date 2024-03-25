@@ -88,17 +88,26 @@ const currencies = new Map([
   ["GBP", "Pound sterling"],
 ]);
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, local) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
   console.log(daysPassed);
 
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  // const day = date.getDate();
+  // const month = date.getMonth() + 1;
+  // const year = date.getFullYear();
+  // return `${day}/${month}/${year}`;
+
+  return new Intl.DateTimeFormat(local).format(date);
+};
+
+const formatCur = function (value, local, currency) {
+  return new Intl.NumberFormat(local, {
+    style: "currency",
+    currency: currency,
+  }).format(value);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -111,12 +120,14 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.local);
+
+    const formatedMov = formatCur(mov, acc.local, acc.currency);
     const html = `
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
     <div class="movements__date">${displayDate}</div>
-    <div class="movements__value">${mov.toFixed(2)}</div>
+    <div class="movements__value">${formatedMov}</div>
     </div>`;
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -125,7 +136,8 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplaytBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)} EUR`;
+  const formatedMov = formatCur(acc.balance, acc.local, acc.currency);
+  labelBalance.textContent = `${formatedMov}`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -133,20 +145,20 @@ const calcDisplaySummary = function (acc) {
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  labelSumIn.textContent = `${incomes} EUR`;
+  labelSumIn.textContent = formatCur(incomes, acc.local, acc.currency);
 
   const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)} EUR`;
+  labelSumOut.textContent = formatCur(Math.abs(out), acc.local, acc.currency);
 
   const interest = acc.movements
     .filter((mov) => mov > 0)
     .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int) => int >= 1)
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)} EUR`;
+  labelSumInterest.textContent = formatCur(interest, acc.local, acc.currency);
 };
 
 const createUsernames = function (accs) {
@@ -169,7 +181,27 @@ const updateUI = function (acc) {
 
 //////
 
-let currentAccount;
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = `Log in to get started`;
+    }
+    time--;
+  };
+
+  let time = 300;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
+let currentAccount, timer;
 
 ///Fack
 
@@ -186,16 +218,34 @@ btnLogin.addEventListener("click", function (e) {
     containerApp.style.opacity = 100;
     inputLoginUsername.value = inputLoginPin.value = ``;
     inputLoginPin.blur();
+
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
     updateUI(currentAccount);
   }
 
+  // const now = new Date();
+  // const day = now.getDate();
+  // const month = now.getMonth() + 1;
+  // const year = now.getFullYear();
+  // const hour = now.getHours();
+  // const min = now.getHours();
+  // labelDate.textContent = `${day}/${month}/${year} ${hour}:${min}`;
+
   const now = new Date();
-  const day = now.getDate();
-  const month = now.getMonth() + 1;
-  const year = now.getFullYear();
-  const hour = now.getHours();
-  const min = now.getHours();
-  labelDate.textContent = `${day}/${month}/${year} ${hour}:${min}`;
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+    weekday: "long",
+  };
+
+  labelDate.textContent = new Intl.DateTimeFormat(
+    currentAccount.locale,
+    options
+  ).format(now);
 });
 
 btnTransfer.addEventListener("click", function (e) {
@@ -220,6 +270,8 @@ btnTransfer.addEventListener("click", function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -231,11 +283,15 @@ btnLoan.addEventListener("click", function (e) {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
-    updateUI(currentAccount);
+    setTimeout(function () {
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
+      updateUI(currentAccount);
+    }, 10000);
   }
   inputLoanAmount.value = "";
+  clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 btnClose.addEventListener("click", function (e) {
@@ -277,3 +333,13 @@ labelBalance.addEventListener("click", function () {
 });
 
 console.log(new Date(account1.movementsDates[0]));
+
+const num = 3332323.23;
+console.log("us", new Intl.NumberFormat("en-US").format(num));
+console.log("Germany", new Intl.NumberFormat("en-DE").format(num));
+
+// setInterval(function () {
+//   const now = new Date();
+//   const sec = now.getSeconds();
+//   console.log(sec + 1);
+// }, 1000);
