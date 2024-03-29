@@ -95,7 +95,7 @@ document.addEventListener("keydown", function (e) {
 ////////Button Scroling
 
 btnScrollTo.addEventListener("click", function (e) {
-  const s1coords = section1.getBoundingClientRect();
+  // const s1coords = section1.getBoundingClientRect();
   // window.scrollTo({
   //   left: s1coords.left + window.pageXOffset,
   //   top: s1coords.top + window.pageYOffset,
@@ -127,6 +127,7 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 
 tabsContainer.addEventListener("click", function (e) {
   const clicked = e.target.closest(".operations__tab");
+
   if (!clicked) return;
   //Active Tab
   tabs.forEach((t) => t.classList.remove("operations__tab--active"));
@@ -141,7 +142,7 @@ tabsContainer.addEventListener("click", function (e) {
 
 /////menu
 
-const hendleHover = function (e, op) {
+const hendleHover = function (e) {
   if (e.target.classList.contains("nav__link")) {
     const link = e.target;
     const siblings = link.closest(".nav").querySelectorAll(".nav__link");
@@ -157,15 +158,67 @@ nav.addEventListener("mouseover", hendleHover.bind(0.5));
 nav.addEventListener("mouseout", hendleHover.bind(1));
 
 ///sticy navigation
-const obsCallback = function (entries, observe) {
-  entries.forEach((entries) => {
-    console.log(entries);
-  });
-};
-const obsOption = {
-  root: null,
-  threshold: 0.1,
-};
+// const obsCallback = function (entries, observe) {
+//   entries.forEach((entries) => {
+//     console.log(entries);
+//   });
+// };
+// const obsOption = {
+//   root: null,
+//   threshold: 0.1,
+// };
 
-const observer = new IntersectionObserver(obsCallback, obsOption);
-observer.observe(section1);
+// const observer = new IntersectionObserver(obsCallback, obsOption);
+// observer.observe(section1);
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+};
+const header = document.querySelector(".header");
+const navHight = nav.getBoundingClientRect().height;
+const headerObsorever = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHight}px`,
+});
+headerObsorever.observe(header);
+
+////Reveal Section
+const allSections = document.querySelectorAll(".section");
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove("section--hidden");
+  observer.unobserve(entry.target);
+};
+const sectionObsorver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  sectionObsorver.observe(section);
+  section.classList.add("section--hidden");
+});
+
+/////Lazy Img
+const imgTargets = document.querySelectorAll("img[data-src");
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener("load", function () {
+    entry.target.classList.remove("lazy-img");
+  });
+
+  observer.unobserve(entry.target);
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: "-300px",
+});
+imgTargets.forEach((img) => imgObserver.observe(img));
