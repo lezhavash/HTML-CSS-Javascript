@@ -63,7 +63,10 @@ const btnCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
-
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
+const nav = document.querySelector(".nav");
 ///////////////////////////////////////
 // Modal window
 
@@ -121,9 +124,6 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 });
 
 ////Tabed component
-const tabs = document.querySelectorAll(".operations__tab");
-const tabsContainer = document.querySelector(".operations__tab-container");
-const tabsContent = document.querySelectorAll(".operations__content");
 
 tabsContainer.addEventListener("click", function (e) {
   const clicked = e.target.closest(".operations__tab");
@@ -140,10 +140,32 @@ tabsContainer.addEventListener("click", function (e) {
 });
 
 /////menu
-const nav = document.querySelector(".nav");
 
-nav.addEventListener("mouseover", function (e) {
+const hendleHover = function (e, op) {
   if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+    siblings.forEach((el) => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
   }
-});
-nav.addEventListener("mouseout", function (e) {});
+};
+
+nav.addEventListener("mouseover", hendleHover.bind(0.5));
+nav.addEventListener("mouseout", hendleHover.bind(1));
+
+///sticy navigation
+const obsCallback = function (entries, observe) {
+  entries.forEach((entries) => {
+    console.log(entries);
+  });
+};
+const obsOption = {
+  root: null,
+  threshold: 0.1,
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOption);
+observer.observe(section1);
