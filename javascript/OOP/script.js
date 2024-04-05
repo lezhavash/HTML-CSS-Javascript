@@ -77,19 +77,20 @@ car1.speedUS = 200;
 console.log(car1);
 
 class Ev2 extends Car {
+  #charge;
   constructor(make, speed, charge) {
     super(make, speed);
-    this.charge = charge;
+    this.#charge = charge;
   }
 
   chargeBattery = function (chargeTo) {
-    this.charge = chargeTo;
+    this.#charge = chargeTo;
   };
 
   accelerate = function () {
     this.speed += 20;
-    this.charge--;
-    console.log(this.speed, this.charge);
+    this.#charge--;
+    console.log(this.speed, this.#charge);
   };
 }
 
