@@ -62,6 +62,7 @@ const renderCountry = function (data, className = " ") {
 };
 
 const renderError = function (msg) {
+  countriesContainer.innerHTML = " ";
   countriesContainer.insertAdjacentText("beforeend", msg);
 };
 
