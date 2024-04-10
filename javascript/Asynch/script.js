@@ -141,13 +141,13 @@ const renderError = function (msg) {
 //   getCountryData("georgia");
 // });
 
-let x = [];
+let xy = [];
 
 navigator.geolocation.getCurrentPosition(
   function (position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    x = [longitude, latitude];
+    xy = [longitude, latitude];
   },
   function () {
     alert("Culd not get your positon");
@@ -181,5 +181,5 @@ const whereAmI = function ([lat, lng]) {
 };
 
 btn.addEventListener("click", function () {
-  whereAmI([44.783606, 41.768765]);
+  whereAmI(xy);
 });
