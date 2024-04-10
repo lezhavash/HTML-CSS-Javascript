@@ -62,27 +62,44 @@ const renderCountry = function (data, className = " ") {
   countriesContainer.style.opacity = 1;
 };
 
-const getCountryAndNeighbour = function (country) {
-  const request = new XMLHttpRequest();
-  request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
-  request.send();
+// const getCountryAndNeighbour = function (country) {
+//   const request = new XMLHttpRequest();
+//   request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
+//   request.send();
 
-  request.addEventListener("load", function () {
-    const [data] = JSON.parse(this.responseText);
-    //Render country1
-    renderCountry(data);
-    ////
-    const naighbour = data.borders;
-    if (!naighbour) return;
-    naighbour.forEach(function (n) {
-      const requestN = new XMLHttpRequest();
-      requestN.open("GET", `https://restcountries.com/v3.1/alpha/${n}`);
-      requestN.send();
-      requestN.addEventListener("load", function () {
-        const [dataN] = JSON.parse(this.responseText);
-        renderCountry(dataN, "neighbour");
+//   request.addEventListener("load", function () {
+//     const [data] = JSON.parse(this.responseText);
+//     //Render country1
+//     renderCountry(data);
+//     ////
+//     const naighbour = data.borders;
+//     if (!naighbour) return;
+//     naighbour.forEach(function (n) {
+//       const requestN = new XMLHttpRequest();
+//       requestN.open("GET", `https://restcountries.com/v3.1/alpha/${n}`);
+//       requestN.send();
+//       requestN.addEventListener("load", function () {
+//         const [dataN] = JSON.parse(this.responseText);
+//         renderCountry(dataN, "neighbour");
+//       });
+//     });
+//   });
+// };
+// getCountryAndNeighbour("portugal");
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`).then((responce) =>
+    responce.json().then(function (data) {
+      renderCountry(data[0]);
+      const arr = data[0].borders;
+      if (!arr) return;
+      arr.forEach(function (con) {
+        fetch(`https://restcountries.com/v3.1/alpha/${con}`).then((responce) =>
+          responce.json().then((data) => renderCountry(data[0], "neighbour"))
+        );
       });
-    });
-  });
+    })
+  );
 };
-getCountryAndNeighbour("georgia");
+
+getCountryData("australia");

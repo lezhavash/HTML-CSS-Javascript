@@ -24,12 +24,14 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  margin: 4rem 0 4rem 0;
 }
 
 .countries {
   /* margin-bottom: 8rem; */
-  display: flex;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 2rem;
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -46,7 +48,7 @@ body {
 }
 
 .neighbour::before {
-  content: 'Neighbour country';
+  content: "Neighbour country";
   width: 100%;
   position: absolute;
   top: -4rem;
