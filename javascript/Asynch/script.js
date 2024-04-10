@@ -147,7 +147,7 @@ navigator.geolocation.getCurrentPosition(
   function (position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    xy = [longitude, latitude];
+    xy = [latitude, longitude];
   },
   function () {
     alert("Culd not get your positon");
