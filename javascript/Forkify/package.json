@@ -1,0 +1,12 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "parsal index.html",
+    "build": "parsal build index.html"
+  },
+  "author": "Shota Lezhava",
+  "license": "ISC"
+}
