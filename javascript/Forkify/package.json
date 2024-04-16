@@ -2,11 +2,15 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "default": "index.html",
   "scripts": {
-    "start": "parsal index.html",
-    "build": "parsal build index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Shota Lezhava",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "parcel": "^2.12.0"
+  }
 }
