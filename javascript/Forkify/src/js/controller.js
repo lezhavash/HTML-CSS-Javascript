@@ -61,11 +61,12 @@ const controlServing = function () {
   //update the recipe servings
   model.updateServings(8);
   //update the recipe view
-  paginationView.render(model.state.search);
+  paginationView.render(model.state.recipe);
 };
 
 const init = function () {
   recipeView.addHendlerRender(controlRecipes);
+  recipeView.addHendlerUpdateServings(controlServing);
   searchView.addHandlerSearch(controlSearchresults);
   paginationView.addHendlerClick(controlPagination);
 };

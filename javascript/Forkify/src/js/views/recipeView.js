@@ -13,6 +13,14 @@ class RecipeView extends View {
     );
   }
 
+  addHendlerUpdateServings(hendler) {
+    this._perentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".btn--tiny");
+      if (!btn) return;
+      hendler();
+    });
+  }
+
   _generateMarkup() {
     return `
     <figure class="recipe__fig">
