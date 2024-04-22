@@ -1,4 +1,5 @@
 import icons from "../../img/icons.svg";
+import resultsView from "./resultsView";
 import View from "./view";
 class PaginationView extends View {
   _perentElement = document.querySelector(".pagination");
