@@ -18,8 +18,13 @@ const controlRecipes = async function () {
     if (!id) return;
     recipeView.renderSpiner();
 
+    //Update
+    recipeView.update(model.getSearchresultsPage());
+
     //Loading Recipe
     await model.loadRecipe(id);
+
+    console.log(model.state);
 
     // Rendering Recipe
     recipeView.render(model.state.recipe);
