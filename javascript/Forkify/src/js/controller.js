@@ -83,7 +83,17 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newrecipe) {
   try {
+    addRecipeView.renderSpiner();
+
     await model.uploadRecipe(newrecipe);
+
+    recipeView.render(model.state.recipe);
+
+    addRecipeView.renderMessage();
+
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, 2500);
   } catch (err) {
     addRecipeView.renderError(err.message);
   }
