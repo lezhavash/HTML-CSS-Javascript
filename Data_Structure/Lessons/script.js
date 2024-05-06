@@ -117,14 +117,14 @@ function findFirstRepetitiveNumber(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < i; j++) {
       if (arr[j] === arr[i]) {
-        return arr[i];
+        return arr[j];
       }
     }
   }
   return null;
 }
 
-const numbers = [2, 5, 5, 2, 43, 7, 5, 2, 2, 5];
+const numbers = [2, 3, 5, 5, 2, 43, 7, 5, 2, 2, 5];
 const firstRepetitive = findFirstRepetitiveNumber(numbers);
 console.log(firstRepetitive);
 
