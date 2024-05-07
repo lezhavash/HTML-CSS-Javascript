@@ -178,6 +178,10 @@ class LinkedList {
   }
 
   insert(index, value) {
+    if (index >= this.length) {
+      return this.append(value);
+    }
+
     const newNode = new Node(value);
     const leader = this.treverseToInder(index - 1);
     const next = leader.next;
