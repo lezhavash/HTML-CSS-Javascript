@@ -183,10 +183,10 @@ class LinkedList {
     }
 
     const newNode = new Node(value);
-    const leader = this.treverseToInder(index - 1);
-    const next = leader.next;
+    const previous = this.treverseToInder(index - 1);
+    const next = previous.next;
     newNode.next = next;
-    leader.next = newNode;
+    previous.next = newNode;
     this.length++;
   }
 
@@ -199,6 +199,17 @@ class LinkedList {
     }
     return curentNode;
   }
+
+  remove(index) {
+    const previous = this.treverseToInder(index - 1);
+    const current = previous.next;
+    previous.next = current.next;
+    this.length--;
+  }
+
+  lookup(index) {
+    console.log(this.treverseToInder(index).value);
+  }
 }
 
 const myLinkedList = new LinkedList(10);
@@ -206,4 +217,6 @@ myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
 myLinkedList.insert(2, 99);
+myLinkedList.remove(2);
+myLinkedList.lookup(3);
 console.log(myLinkedList);
