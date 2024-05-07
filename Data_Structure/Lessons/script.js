@@ -113,20 +113,20 @@
 //   }
 // };
 
-function findFirstRepetitiveNumber(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < i; j++) {
-      if (arr[j] === arr[i]) {
-        return arr[j];
-      }
-    }
-  }
-  return null;
-}
+// function findFirstRepetitiveNumber(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     for (let j = 0; j < i; j++) {
+//       if (arr[j] === arr[i]) {
+//         return arr[j];
+//       }
+//     }
+//   }
+//   return null;
+// }
 
-const numbers = [2, 3, 5, 5, 2, 43, 7, 5, 2, 2, 5];
-const firstRepetitive = findFirstRepetitiveNumber(numbers);
-console.log(firstRepetitive);
+// const numbers = [2, 3, 5, 5, 2, 43, 7, 5, 2, 2, 5];
+// const firstRepetitive = findFirstRepetitiveNumber(numbers);
+// console.log(firstRepetitive);
 
 // const repetitive2 = function (arr) {
 //   let map = {};
@@ -142,3 +142,64 @@ console.log(firstRepetitive);
 // };
 // let y = repetitive2([2, 5, 5, 2, 3, 5, 1, 2, 4]);
 // console.log(y);
+
+////Link Lists////
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null,
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value) {
+    const newNode = new Node(value);
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+  }
+
+  insert(index, value) {
+    const newNode = new Node(value);
+    const leader = this.treverseToInder(index - 1);
+    const next = leader.next;
+    newNode.next = next;
+    leader.next = newNode;
+    this.length++;
+  }
+
+  treverseToInder(index) {
+    let counter = 0;
+    let curentNode = this.head;
+    while (counter !== index) {
+      curentNode = curentNode.next;
+      counter++;
+    }
+    return curentNode;
+  }
+}
+
+const myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);
+myLinkedList.prepend(1);
+myLinkedList.insert(2, 99);
+console.log(myLinkedList);
