@@ -210,13 +210,137 @@ class LinkedList {
   lookup(index) {
     console.log(this.treverseToInder(index).value);
   }
+
+  reverse() {
+    if (!this.head.next) {
+      return this.head;
+    }
+    let first = this.head;
+    this.tail = this.head;
+    let second = first.next;
+
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+
+      console.log(first);
+      console.log(second);
+      console.log(temp);
+      console.log("1---");
+
+      first = second;
+
+      console.log(first);
+      console.log(second);
+      console.log(temp);
+      console.log("2---");
+
+      second = temp;
+
+      console.log(first);
+      console.log(second);
+      console.log(temp);
+      console.log("----------------");
+    }
+    console.log(this.head.next);
+
+    this.head.next = null;
+    this.head = first;
+  }
 }
 
 const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
+myLinkedList.append(12);
 myLinkedList.prepend(1);
 myLinkedList.insert(2, 99);
 myLinkedList.remove(2);
-myLinkedList.lookup(3);
+myLinkedList.reverse();
+
 console.log(myLinkedList);
+
+////Doubly Link List
+
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//     this.prev = null;
+//   }
+// }
+
+// class DoublyLinkedList {
+//   constructor(value) {
+//     this.head = {
+//       value: value,
+//       next: null,
+//       prev: null,
+//     };
+//     this.tail = this.head;
+//     this.length = 1;
+//   }
+
+//   append(value) {
+//     const newNode = new Node(value);
+//     newNode.prev = this.tail;
+//     this.tail.next = newNode;
+//     this.tail = newNode;
+//     this.length++;
+//     return this;
+//   }
+
+//   prepend(value) {
+//     const newNode = new Node(value);
+//     this.head.prev = newNode;
+//     newNode.next = this.head;
+//     this.head = newNode;
+//     this.length++;
+//   }
+
+//   insert(index, value) {
+//     if (index >= this.length) {
+//       return this.append(value);
+//     }
+
+//     const newNode = new Node(value);
+//     const previous = this.treverseToInder(index - 1);
+//     newNode.prev = previous;
+//     const next = previous.next;
+//     newNode.next = next;
+//     previous.next = newNode;
+//     next.prev = newNode;
+//     this.length++;
+//   }
+
+//   treverseToInder(index) {
+//     let counter = 0;
+//     let curentNode = this.head;
+//     while (counter !== index) {
+//       curentNode = curentNode.next;
+//       counter++;
+//     }
+//     return curentNode;
+//   }
+
+//   remove(index) {
+//     const previous = this.treverseToInder(index - 1);
+//     const unvonted = previous.next;
+//     previous.next = unvonted.next;
+//     previous.next.prev = previous;
+//     this.length--;
+//   }
+
+//   lookup(index) {
+//     console.log(this.treverseToInder(index).value);
+//   }
+// }
+
+// const myDoublyLinkedList = new DoublyLinkedList(10);
+// myDoublyLinkedList.append(5);
+// myDoublyLinkedList.append(16);
+// myDoublyLinkedList.prepend(1);
+// myDoublyLinkedList.insert(2, 99);
+// myDoublyLinkedList.remove(3);
+// myDoublyLinkedList.lookup(3);
+// console.log(myDoublyLinkedList);
