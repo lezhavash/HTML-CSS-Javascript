@@ -381,10 +381,10 @@ class Stack {
     this.length++;
   }
   pop() {
-    const temp = this.top.next;
-    this.top = temp;
+    const temp = this.top;
+    this.top = this.top.next;
     this.length--;
-    console.log(`New Top ${this.top.value}`);
+    console.log(`I removed ${temp.value}`);
   }
 }
 
