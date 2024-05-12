@@ -352,6 +352,53 @@
 // console.log(myDoublyLinkedList);
 
 ////Stacks////
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+// }
+
+// class Stack {
+//   constructor() {
+//     this.top = null;
+//     this.bottom = null;
+//     this.length = 0;
+//   }
+//   peek() {
+//     console.log(this.top.value);
+//   }
+//   push(value) {
+//     const newNode = new Node(value);
+//     if (this.length === 0) {
+//       this.top = newNode;
+//       this.bottom = newNode;
+//     } else {
+//       const temp = this.top;
+//       this.top = newNode;
+//       newNode.next = temp;
+//     }
+//     this.length++;
+//   }
+//   pop() {
+//     const temp = this.top;
+//     this.top = this.top.next;
+//     this.length--;
+//     console.log(`I removed ${temp.value}`);
+//   }
+// }
+
+// const myStack = new Stack();
+// myStack.push(5);
+// myStack.push(6);
+// myStack.push(7);
+// myStack.peek();
+// myStack.pop();
+
+// console.log(myStack);
+
+////Queue///
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -359,40 +406,38 @@ class Node {
   }
 }
 
-class Stack {
+class Queue {
   constructor() {
-    this.top = null;
-    this.bottom = null;
+    this.first = null;
+    this.last = null;
     this.length = 0;
   }
   peek() {
-    console.log(this.top.value);
+    console.log(this.first.value);
   }
-  push(value) {
+  enqueue(value) {
     const newNode = new Node(value);
     if (this.length === 0) {
-      this.top = newNode;
-      this.bottom = newNode;
+      this.first = newNode;
+      this.last = newNode;
     } else {
-      const temp = this.top;
-      this.top = newNode;
-      newNode.next = temp;
+      this.last.next = newNode;
+      this.last = newNode;
     }
     this.length++;
   }
-  pop() {
-    const temp = this.top;
-    this.top = this.top.next;
+  dequeue() {
+    const temp = this.first;
+    this.first = this.first.next;
     this.length--;
-    console.log(`I removed ${temp.value}`);
+    return temp;
   }
 }
 
-const myStack = new Stack();
-myStack.push(5);
-myStack.push(6);
-myStack.push(7);
-myStack.peek();
-myStack.pop();
-
-console.log(myStack);
+const myQueue = new Queue();
+myQueue.enqueue(10);
+myQueue.enqueue(4);
+myQueue.enqueue(8);
+myQueue.peek();
+myQueue.dequeue();
+console.log(myQueue);
