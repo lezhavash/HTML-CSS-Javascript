@@ -399,45 +399,110 @@
 
 ////Queue///
 
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
+// }
+
+// class Queue {
+//   constructor() {
+//     this.first = null;
+//     this.last = null;
+//     this.length = 0;
+//   }
+//   peek() {
+//     console.log(this.first.value);
+//   }
+//   enqueue(value) {
+//     const newNode = new Node(value);
+//     if (this.length === 0) {
+//       this.first = newNode;
+//       this.last = newNode;
+//     } else {
+//       this.last.next = newNode;
+//       this.last = newNode;
+//     }
+//     this.length++;
+//   }
+//   dequeue() {
+//     const temp = this.first;
+//     this.first = this.first.next;
+//     this.length--;
+//     return temp;
+//   }
+// }
+
+// const myQueue = new Queue();
+// myQueue.enqueue(10);
+// myQueue.enqueue(4);
+// myQueue.enqueue(8);
+// myQueue.peek();
+// myQueue.dequeue();
+// console.log(myQueue);
+
+///Binary Search Tree////
 class Node {
   constructor(value) {
     this.value = value;
-    this.next = null;
+    this.left = null;
+    this.right = null;
   }
 }
 
-class Queue {
+class BinarySearchTree {
   constructor() {
-    this.first = null;
-    this.last = null;
-    this.length = 0;
+    this.root = null;
   }
-  peek() {
-    console.log(this.first.value);
-  }
-  enqueue(value) {
+  insert(value) {
     const newNode = new Node(value);
-    if (this.length === 0) {
-      this.first = newNode;
-      this.last = newNode;
+    if (!this.root) {
+      this.root = newNode;
     } else {
-      this.last.next = newNode;
-      this.last = newNode;
+      let curentNode = this.root;
+      while (true) {
+        if (value < curentNode.value) {
+          if (!curentNode.left) {
+            curentNode.left = newNode;
+            return this;
+          }
+          curentNode = curentNode.left;
+        } else {
+          if (!curentNode.right) {
+            curentNode.right = newNode;
+            return this;
+          }
+          curentNode = curentNode.right;
+        }
+      }
     }
-    this.length++;
   }
-  dequeue() {
-    const temp = this.first;
-    this.first = this.first.next;
-    this.length--;
-    return temp;
+  lookup(value) {
+    let curentNode = this.root;
+    while (curentNode) {
+      if (value < curentNode.value) {
+        curentNode = curentNode.left;
+      }
+      if (value > curentNode.value) {
+        curentNode = curentNode.right;
+      }
+      if (value === curentNode.value) {
+        console.log(curentNode);
+        return curentNode;
+      }
+    }
+    return false;
   }
 }
 
-const myQueue = new Queue();
-myQueue.enqueue(10);
-myQueue.enqueue(4);
-myQueue.enqueue(8);
-myQueue.peek();
-myQueue.dequeue();
-console.log(myQueue);
+const tree = new BinarySearchTree();
+tree.insert(9);
+tree.insert(4);
+tree.insert(6);
+tree.insert(20);
+tree.insert(170);
+tree.insert(15);
+tree.insert(1);
+tree.lookup(4);
+console.log(tree);
