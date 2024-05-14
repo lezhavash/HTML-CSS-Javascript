@@ -443,66 +443,92 @@
 // console.log(myQueue);
 
 ///Binary Search Tree////
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-}
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
 
-class BinarySearchTree {
+// class BinarySearchTree {
+//   constructor() {
+//     this.root = null;
+//   }
+//   insert(value) {
+//     const newNode = new Node(value);
+//     if (!this.root) {
+//       this.root = newNode;
+//     } else {
+//       let curentNode = this.root;
+//       while (true) {
+//         if (value < curentNode.value) {
+//           if (!curentNode.left) {
+//             curentNode.left = newNode;
+//             return this;
+//           }
+//           curentNode = curentNode.left;
+//         } else {
+//           if (!curentNode.right) {
+//             curentNode.right = newNode;
+//             return this;
+//           }
+//           curentNode = curentNode.right;
+//         }
+//       }
+//     }
+//   }
+//   lookup(value) {
+//     let curentNode = this.root;
+//     while (curentNode) {
+//       if (value < curentNode.value) {
+//         curentNode = curentNode.left;
+//       }
+//       if (value > curentNode.value) {
+//         curentNode = curentNode.right;
+//       }
+//       if (value === curentNode.value) {
+//         console.log(curentNode);
+//         return curentNode;
+//       }
+//     }
+//     return false;
+//   }
+// }
+
+// const tree = new BinarySearchTree();
+// tree.insert(9);
+// tree.insert(4);
+// tree.insert(6);
+// tree.insert(20);
+// tree.insert(170);
+// tree.insert(15);
+// tree.insert(1);
+// tree.lookup(4);
+// console.log(tree);
+
+////Graph///
+
+class Graph {
   constructor() {
-    this.root = null;
+    this.numberOfNouds = 0;
+    this.adjacentList = {};
   }
-  insert(value) {
-    const newNode = new Node(value);
-    if (!this.root) {
-      this.root = newNode;
-    } else {
-      let curentNode = this.root;
-      while (true) {
-        if (value < curentNode.value) {
-          if (!curentNode.left) {
-            curentNode.left = newNode;
-            return this;
-          }
-          curentNode = curentNode.left;
-        } else {
-          if (!curentNode.right) {
-            curentNode.right = newNode;
-            return this;
-          }
-          curentNode = curentNode.right;
-        }
-      }
-    }
+  addVertex(node) {
+    this.adjacentList[node] = [];
+    this.numberOfNouds++;
   }
-  lookup(value) {
-    let curentNode = this.root;
-    while (curentNode) {
-      if (value < curentNode.value) {
-        curentNode = curentNode.left;
-      }
-      if (value > curentNode.value) {
-        curentNode = curentNode.right;
-      }
-      if (value === curentNode.value) {
-        console.log(curentNode);
-        return curentNode;
-      }
-    }
-    return false;
+  addEdge(node1, node2) {
+    this.adjacentList[node1].push(node2);
+    this.adjacentList[node2].push(node1);
   }
 }
 
-const tree = new BinarySearchTree();
-tree.insert(9);
-tree.insert(4);
-tree.insert(6);
-tree.insert(20);
-tree.insert(170);
-tree.insert(15);
-tree.insert(1);
-tree.lookup(4);
-console.log(tree);
+const myGraph = new Graph();
+myGraph.addVertex(0);
+myGraph.addVertex(1);
+myGraph.addVertex(2);
+myGraph.addEdge(1, 2);
+myGraph.addEdge(2, 0);
+
+console.log(myGraph);
