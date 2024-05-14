@@ -509,26 +509,26 @@
 
 ////Graph///
 
-class Graph {
-  constructor() {
-    this.numberOfNouds = 0;
-    this.adjacentList = {};
-  }
-  addVertex(node) {
-    this.adjacentList[node] = [];
-    this.numberOfNouds++;
-  }
-  addEdge(node1, node2) {
-    this.adjacentList[node1].push(node2);
-    this.adjacentList[node2].push(node1);
-  }
-}
+// class Graph {
+//   constructor() {
+//     this.numberOfNouds = 0;
+//     this.adjacentList = {};
+//   }
+//   addVertex(node) {
+//     this.adjacentList[node] = [];
+//     this.numberOfNouds++;
+//   }
+//   addEdge(node1, node2) {
+//     this.adjacentList[node1].push(node2);
+//     this.adjacentList[node2].push(node1);
+//   }
+// }
 
-const myGraph = new Graph();
-myGraph.addVertex(0);
-myGraph.addVertex(1);
-myGraph.addVertex(2);
-myGraph.addEdge(1, 2);
-myGraph.addEdge(2, 0);
+// const myGraph = new Graph();
+// myGraph.addVertex(0);
+// myGraph.addVertex(1);
+// myGraph.addVertex(2);
+// myGraph.addEdge(1, 2);
+// myGraph.addEdge(2, 0);
 
-console.log(myGraph);
+// console.log(myGraph);
