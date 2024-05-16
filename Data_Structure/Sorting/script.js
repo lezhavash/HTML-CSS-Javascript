@@ -12,12 +12,10 @@ const bubble = function (arr) {
   }
 };
 
-const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
-
 // bubble(numbers);
 // console.log(numbers);
 
-////Selection Sort////
+//Selection Sort////
 const selectionSort = function (arr) {
   for (let i = 0; i < arr.length; i++) {
     let small = i;
@@ -32,5 +30,22 @@ const selectionSort = function (arr) {
   }
 };
 
-selectionSort(numbers);
+// selectionSort(numbers);
+// console.log(numbers);
+
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+////Insertion Sort////
+const insertionSort = function (arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let num = arr[i];
+    let sort = i - 1;
+    while (sort >= 0 && arr[sort] > num) {
+      arr[sort + 1] = arr[sort];
+      sort--;
+    }
+    arr[sort + 1] = num;
+  }
+};
+insertionSort(numbers);
 console.log(numbers);
