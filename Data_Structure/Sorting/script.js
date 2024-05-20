@@ -47,5 +47,39 @@ const insertionSort = function (arr) {
     arr[sort + 1] = num;
   }
 };
-insertionSort(numbers);
-console.log(numbers);
+// insertionSort(numbers);
+// console.log(numbers);
+
+////Merge sort////
+
+const margeSort = function (arr) {
+  if (arr.length === 1) {
+    return arr;
+  }
+  const length = arr.length;
+  const middle = Math.floor(length / 2);
+  let left = arr.slice(0, middle);
+  let right = arr.slice(middle);
+
+  return marge(margeSort(left), margeSort(right));
+};
+
+const marge = function (left, right) {
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  return result.concat(left.slice(leftIndex).concat(right.slice(rightIndex)));
+};
+
+const answer = margeSort(numbers);
+console.log(answer);
