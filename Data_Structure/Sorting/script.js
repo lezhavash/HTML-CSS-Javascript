@@ -47,8 +47,8 @@ const insertionSort = function (arr) {
     arr[sort + 1] = num;
   }
 };
-// insertionSort(numbers);
-// console.log(numbers);
+insertionSort(numbers);
+console.log(numbers);
 
 ////Merge sort////
 
@@ -60,7 +60,6 @@ const margeSort = function (arr) {
   const middle = Math.floor(length / 2);
   let left = arr.slice(0, middle);
   let right = arr.slice(middle);
-
   return marge(margeSort(left), margeSort(right));
 };
 
@@ -77,9 +76,48 @@ const marge = function (left, right) {
       rightIndex++;
     }
   }
-
   return result.concat(left.slice(leftIndex).concat(right.slice(rightIndex)));
 };
 
-const answer = margeSort(numbers);
-console.log(answer);
+// const answer = margeSort(numbers);
+// console.log(answer);
+
+function quickSort(array, left, right) {
+  const len = array.length;
+  let pivot;
+  let partitionIndex;
+
+  if (left < right) {
+    pivot = right;
+    partitionIndex = partition(array, pivot, left, right);
+
+    //sort left and right
+    quickSort(array, left, partitionIndex - 1);
+    quickSort(array, partitionIndex + 1, right);
+  }
+  return array;
+}
+
+function partition(array, pivot, left, right) {
+  let pivotValue = array[pivot];
+  let partitionIndex = left;
+
+  for (let i = left; i < right; i++) {
+    if (array[i] < pivotValue) {
+      swap(array, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(array, right, partitionIndex);
+  return partitionIndex;
+}
+
+function swap(array, firstIndex, secondIndex) {
+  var temp = array[firstIndex];
+  array[firstIndex] = array[secondIndex];
+  array[secondIndex] = temp;
+}
+
+//Select first and last index as 2nd and 3rd parameters
+// quickSort(numbers, 0, numbers.length - 1);
+// console.log(numbers);
