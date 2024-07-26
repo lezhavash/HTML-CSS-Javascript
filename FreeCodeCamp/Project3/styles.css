@@ -14,25 +14,84 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  font-size: 1.6rem; /* 16px */
+  font-size: 1.5rem; /* 16px */
   color: #4d4e53;
   line-height: 1.5;
 }
 
 header {
-  font-size: 3rem;
+  font-size: 2.6rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
 #navbar {
   position: fixed;
-  min-width: 30rem;
+  width: 30rem;
   top: 0;
   left: 0;
-  /* width: 100%; */
   height: 100%;
-  border-right: solid;
+  border-right: solid 2px;
+}
+
+#navbar header {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#navbar ul {
+  list-style: none;
+}
+
+#navbar li {
+  border-top: solid 1px;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #4d4e53;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+#navbar ul li a {
+  text-decoration: none;
+  color: inherit;
 }
 
 #main-doc {
   margin-left: 31rem;
+  padding: 2rem;
+}
+.main-section {
+  margin-bottom: 4rem;
+}
+
+.main-section ul {
+  margin-top: 2rem;
+  margin-left: 6rem;
+  font-weight: 100;
+}
+
+.main-section p {
+  margin-left: 2rem;
+  font-weight: 200;
+}
+
+.main-section code {
+  display: block;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: solid 1px #eee;
+  padding: 2rem;
+  font-weight: 100;
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 54%;
+  }
+  #navbar {
+    width: 29rem;
+  }
 }
