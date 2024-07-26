@@ -10,6 +10,7 @@
 
 html {
   box-sizing: border-box;
+  font-size: 62.5%; /* 1rem = 10px */
 }
 
 body::after {
@@ -37,7 +38,7 @@ body {
   color: aliceblue;
   background-color: #1b1b32;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 1.6rem; /* 16px */
   margin: 0;
   padding: 0;
 }
@@ -46,45 +47,47 @@ body {
   margin: 2rem auto;
   text-align: center;
   font-weight: 400;
+  font-size: 3.6rem; /* 36px */
   line-height: 1.2;
 }
 
 #description {
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   font-style: italic;
   font-weight: 200;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-size: 1.8rem; /* 18px */
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.4);
 }
 
 #survey-form {
   width: 100%;
-  margin: auto;
-  margin-top: 2rem;
+  margin: 2rem auto;
   padding: 2.5rem;
   background-color: rgba(27, 27, 50, 0.8);
-  max-width: 720px;
+  max-width: 72rem; /* 720px */
   border-radius: 0.25rem;
   box-sizing: border-box;
 }
 
 .conteiner {
   display: block;
-  font-size: 1.125rem;
-  margin: 0 auto 1.25rem auto;
+  font-size: 1.4rem; /* 14px */
+  margin: 0 auto 2rem auto;
   padding: 0.25rem;
 }
 
 .conteiner label {
-  font-size: 1.125rem;
+  font-size: 1.4rem; /* 14px */
   width: 100%;
   margin-bottom: 0.5rem;
 }
 
-.conteiner input {
+.conteiner input,
+.conteiner select {
   background-color: #fff;
-  border: 1px solid #ced4da;
-  height: 2.375rem;
+  border: 0.1rem solid #ced4da;
+  height: 2.5rem; /* 25px */
   border-radius: 0.25rem;
   display: block;
   width: 100%;
@@ -93,47 +96,50 @@ body {
   padding-left: 0.5rem;
 }
 
-.conteiner select {
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  height: 2.375rem;
-  border-radius: 0.25rem;
-  display: block;
-  width: 100%;
-  margin: 1rem auto;
-  padding: 0;
-  padding-left: 0.5rem;
-}
-
-input[type="radio"] {
-  display: inline-block;
-  margin: 1em 1em 0 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
-  vertical-align: sub;
-}
-
+input[type="radio"],
 input[type="checkbox"] {
-  display: inline-block;
-  margin: 1em 1em 0 0;
-  min-height: 1.25rem;
-  min-width: 1.25rem;
+  margin-right: 1rem;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
   vertical-align: sub;
+}
+
+.conteiner-radio {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4rem; /* 14px */
+  margin: 0 auto 2rem auto;
 }
 
 .conteiner-radio label {
-  display: block;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.conteiner-radio p {
+  margin-bottom: 1rem; /* Space between the question text and the options */
 }
 
 .text {
-  min-height: 120px;
+  min-height: 15rem; /* 150px */
   width: 100%;
   padding-left: 0.5rem;
   box-sizing: border-box;
 }
 
+.button {
+  background: #37af65;
+}
+
 #submit {
-  padding: 0.75rem;
+  padding: 2rem;
   background: #37af65;
   color: #fff;
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  cursor: pointer;
+  border: none;
+  text-align: center;
 }
