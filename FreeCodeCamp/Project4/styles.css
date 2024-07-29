@@ -82,6 +82,11 @@ body {
   width: 15rem;
 }
 
+#submit:hover {
+  background-color: #ff8c00;
+  transition: all 1s;
+}
+
 section {
   width: 90%;
   margin: auto;
@@ -111,4 +116,58 @@ section {
 
 .iframe {
   text-align: center;
+}
+
+#pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 3rem;
+}
+
+.card {
+  border: solid 1px;
+  text-align: center;
+}
+
+.card header {
+  background-color: #dddddd;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.card h3 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card ul {
+  list-style: none;
+}
+
+.card li {
+  margin-top: 1rem;
+}
+
+.btn {
+  border: none;
+  background-color: #f1c40f;
+  padding: 1rem 3rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.btn:hover {
+  background-color: #ff8c00;
+  transition: all 1s;
+}
+
+footer {
+  padding: 20px;
 }
