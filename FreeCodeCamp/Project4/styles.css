@@ -16,4 +16,68 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
+  background-color: #eee;
+}
+
+#header {
+  display: flex;
+  margin: auto;
+}
+
+.logo {
+  width: 60vw;
+}
+
+#header-img {
+  max-width: 30rem;
+}
+
+#header {
+  height: 7rem;
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#nav-bar ul {
+  width: 30vw;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#nav-bar li a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+#contact {
+  text-align: center;
+}
+
+#contact h2 {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+#form {
+  max-width: 30rem;
+  margin: auto;
+}
+
+#email {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+}
+#submit {
+  text-transform: uppercase;
+  background-color: #f1c40f;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border: none;
+  width: 15rem;
 }
