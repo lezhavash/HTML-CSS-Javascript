@@ -4,39 +4,98 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <title>Project 4</title>
   </head>
   <body>
-    <header id="header">
-      <div class="logo">
-        <img
-          src="https://cdn.freecodecamp.org/testable-projects-fcc/images/product-landing-page-logo.png"
-          alt="logo"
-          id="header-img"
-        />
+    <div class="wraper">
+      <header id="header">
+        <div class="logo">
+          <img
+            src="https://cdn.freecodecamp.org/testable-projects-fcc/images/product-landing-page-logo.png"
+            alt="logo"
+            id="header-img"
+          />
+        </div>
+        <nav id="nav-bar">
+          <ul>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#how-it-works" class="nav-link">How it works</a></li>
+            <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div id="contact">
+        <h2>Handcrafted, home-made masterpieces</h2>
+        <form id="form" action="https://www.freecodecamp.com/email-submit">
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            required=""
+          />
+          <input id="submit" type="submit" value="get started" />
+        </form>
       </div>
-      <nav id="nav-bar">
-        <ul>
-          <li><a href="#features" class="nav-link">Features</a></li>
-          <li><a href="#how-it-works" class="nav-link">How it works</a></li>
-          <li><a href="#pricing" class="nav-link">Pricing</a></li>
-        </ul>
-      </nav>
-    </header>
-    <section id="contact">
-      <h2>Handcrafted, home-made masterpieces</h2>
-      <form id="form" action="https://www.freecodecamp.com/email-submit">
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Enter your email address"
-          required=""
-        />
-        <input id="submit" type="submit" value="get started" />
-      </form>
-    </section>
-    <section id="features"></section>
-    t
+      <section id="features">
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-3x fa-fire"></i>
+          </div>
+          <div class="desc">
+            <h2>Premium Materials</h2>
+            <p>
+              Our trombones use the shiniest brass which is sourced locally.
+              This will increase the longevity of your purchase.
+            </p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-3x fa-truck"></i>
+          </div>
+          <div class="desc">
+            <h2>Fast Shipping</h2>
+            <p>
+              We make sure you recieve your trombone as soon as we have finished
+              making it. We also provide free returns if you are not satisfied.
+            </p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-3x fa-battery-full"></i>
+          </div>
+          <div class="desc">
+            <h2>Quality Assurance</h2>
+            <p>
+              For every purchase you make, we will ensure there are no damages
+              or faults and we will check and test the pitch of your instrument.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="how-it-works">
+        <div class="iframe">
+          <iframe
+            id="video"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/PkZNo7MFNFg?si=sJTcj70oJpcXQQvA"
+            title="YouTube video player"
+            frameborder="0"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen=""
+          ></iframe>
+        </div>
+      </section>
+      <section id="pricing"></section>
+    </div>
   </body>
 </html>

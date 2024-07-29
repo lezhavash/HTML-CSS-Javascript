@@ -19,8 +19,8 @@ body {
   background-color: #eee;
 }
 
-#header {
-  display: flex;
+.wraper {
+  max-width: 1440px;
   margin: auto;
 }
 
@@ -34,7 +34,7 @@ body {
 
 #header {
   height: 7rem;
-  max-width: 1440px;
+  margin: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -80,4 +80,35 @@ body {
   padding: 1rem 2rem;
   border: none;
   width: 15rem;
+}
+
+section {
+  width: 90%;
+  margin: auto;
+  margin-top: 10rem;
+}
+
+.box {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 20vw;
+  color: #ff8c00;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80vw;
+}
+
+.iframe {
+  text-align: center;
 }
