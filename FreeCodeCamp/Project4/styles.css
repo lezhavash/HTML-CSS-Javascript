@@ -20,8 +20,22 @@ body {
 }
 
 .wraper {
+  position: relative;
   max-width: 1440px;
-  margin: auto;
+  margin: 0 auto;
+}
+
+#header {
+  position: fixed;
+  max-width: 1440px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 8rem;
+  background-color: #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .logo {
@@ -30,14 +44,11 @@ body {
 
 #header-img {
   max-width: 30rem;
-}
-
-#header {
-  height: 7rem;
-  margin: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-left: 3rem;
 }
 
 #nav-bar ul {
@@ -48,6 +59,10 @@ body {
   justify-content: space-around;
 }
 
+#nav-bar li {
+  margin-left: 2rem;
+}
+
 #nav-bar li a {
   text-decoration: none;
   color: black;
@@ -55,7 +70,12 @@ body {
 }
 
 #contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+  margin: auto;
+  margin-top: 8rem;
 }
 
 #contact h2 {
@@ -169,5 +189,53 @@ section {
 }
 
 footer {
-  padding: 20px;
+  background-color: #ddd;
+  padding: 2rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 8rem;
+  border-radius: 2px;
+}
+
+footer ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin-right: 2rem;
+}
+
+footer ul li {
+  margin-left: 3rem;
+}
+
+footer ul li a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+footer p {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 57.25em) {
+  /* #header {
+    flex-wrap: wrap;
+  } */
+
+  #header-img {
+    max-width: 25rem;
+  }
+  .logo {
+    width: 50vw;
+  }
+
+  .logo,
+  #nav-bar {
+    display: flex;
+    align-items: center;
+  }
 }
