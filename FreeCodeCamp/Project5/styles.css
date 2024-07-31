@@ -95,6 +95,7 @@ body {
   max-width: 130rem;
   margin: auto;
   margin-top: 6rem;
+  margin-bottom: 6rem;
 }
 
 .card {
@@ -126,4 +127,31 @@ body {
 }
 .card:hover .dot {
   color: #ff7f50;
+}
+
+.btn {
+  font-size: 2rem;
+  display: block;
+  width: 16rem;
+  padding: 1rem 2rem;
+  color: white;
+  background-color: #303841;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: auto;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.fas {
+  margin-left: 0.5rem;
+}
+
+.btn:hover {
+  background-color: #9f303f;
+}
+
+.btn:hover .fas {
+  transform: translateX(0.5rem);
+  transition: all 0.3s;
 }
