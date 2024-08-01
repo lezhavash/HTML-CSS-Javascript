@@ -75,12 +75,12 @@ body {
 
 /* Work Section */
 
-#work {
+#projects {
   background-color: #45567d;
   padding: 10rem 2rem;
 }
 
-#work h2 {
+#projects h2 {
   color: aliceblue;
   font-size: 4rem;
   text-decoration: underline;
@@ -97,6 +97,7 @@ body {
   margin: auto;
   margin-top: 6rem;
   margin-bottom: 6rem;
+  padding: 0rem 2rem;
 }
 
 .card {
@@ -160,4 +161,67 @@ body {
 /* Contacts */
 #contact {
   background-color: #303841;
+  text-align: center;
+  padding: 10rem 10rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+#contact h2 {
+  font-size: 6rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.link {
+  font-size: 2.4rem;
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  transition: all 0.5s;
+}
+
+.link:hover {
+  transform: translateY(1rem);
+}
+
+/* Footer */
+
+.footer {
+  background-color: #303841;
+  padding: 3rem 5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 5px solid #9f303f;
+  color: aliceblue;
+  font-size: 2rem;
+}
+
+@media only screen and (max-width: 85em) {
+  html {
+    font-size: 54.5%;
+  }
+}
+
+@media only screen and (max-width: 55em) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 35em) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
