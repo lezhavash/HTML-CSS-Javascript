@@ -11,6 +11,7 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%; /* 1rem = 10px */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -154,4 +155,9 @@ body {
 .btn:hover .fas {
   transform: translateX(0.5rem);
   transition: all 0.3s;
+}
+
+/* Contacts */
+#contact {
+  background-color: #303841;
 }
