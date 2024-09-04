@@ -47,7 +47,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   padding: 2rem;
-  width: min(100vw, 45rem);
+  width: min(45rem);
   background-color: aliceblue;
   border-radius: 5px;
   box-shadow: 0 6px 6px #002ead;
