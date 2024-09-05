@@ -49,9 +49,10 @@ body {
   padding: 2rem;
   width: min(45rem);
   background-color: aliceblue;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 6px 6px #002ead;
   color: #0a0a23;
+  margin-bottom: 2rem;
 }
 
 .palindrome-lebel {
@@ -81,4 +82,23 @@ body {
   background-color: #5a01a7;
   color: #fff;
   cursor: pointer;
+}
+
+.result-container {
+  margin-top: 2rem;
+}
+
+.palindrome-exp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: min(45rem);
+  background-color: #00471b;
+  border-radius: 10px;
+  font-size: 2.2rem;
+}
+
+.palindrome-exp p {
+  text-align: center;
 }
