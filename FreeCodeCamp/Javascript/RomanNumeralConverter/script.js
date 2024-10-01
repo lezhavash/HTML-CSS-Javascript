@@ -26,12 +26,10 @@ const convertRoman = (num) => {
       num -= arr[1];
     }
   });
-  console.log(result);
-
   return result.join("");
 };
 
-isvalid = (string, int) => {
+const isvalid = (string, int) => {
   let err = "";
   if (string === "") {
     err = "Please enter a valid number";
