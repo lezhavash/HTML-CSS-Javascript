@@ -29,7 +29,7 @@ const convertRoman = (num) => {
   return result.join("");
 };
 
-isvalid = (string, int) => {
+const isvalid = (string, int) => {
   let err = "";
   if (string === "") {
     err = "Please enter a valid number";
