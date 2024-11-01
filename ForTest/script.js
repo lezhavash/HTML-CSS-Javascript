@@ -1,194 +1,130 @@
-const cartContainer = document.getElementById("cart-container");
-const productsContainer = document.getElementById("products-container");
-const dessertCards = document.getElementById("dessert-card-container");
-const cartBtn = document.getElementById("cart-btn");
-const clearCartBtn = document.getElementById("clear-cart-btn");
-const totalNumberOfItems = document.getElementById("total-items");
-const cartSubTotal = document.getElementById("subtotal");
-const cartTaxes = document.getElementById("taxes");
-const cartTotal = document.getElementById("total");
-const showHideCartSpan = document.getElementById("show-hide-cart");
-let isCartShowing = false;
+const startBtn = document.getElementById("start-btn");
+const canvas = document.getElementById("canvas");
+const startScreen = document.querySelector(".start-screen");
+const checkpointScreen = document.querySelector(".checkpoint-screen");
+const checkpointMessage = document.querySelector(".checkpoint-screen > p");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+const gravity = 0.5;
+let isCheckpointCollisionDetectionActive = true;
 
-const products = [
-  {
-    id: 1,
-    name: "Vanilla Cupcakes (6 Pack)",
-    price: 12.99,
-    category: "Cupcake",
-  },
-  {
-    id: 2,
-    name: "French Macaron",
-    price: 3.99,
-    category: "Macaron",
-  },
-  {
-    id: 3,
-    name: "Pumpkin Cupcake",
-    price: 3.99,
-    category: "Cupcake",
-  },
-  {
-    id: 4,
-    name: "Chocolate Cupcake",
-    price: 5.99,
-    category: "Cupcake",
-  },
-  {
-    id: 5,
-    name: "Chocolate Pretzels (4 Pack)",
-    price: 10.99,
-    category: "Pretzel",
-  },
-  {
-    id: 6,
-    name: "Strawberry Ice Cream",
-    price: 2.99,
-    category: "Ice Cream",
-  },
-  {
-    id: 7,
-    name: "Chocolate Macarons (4 Pack)",
-    price: 9.99,
-    category: "Macaron",
-  },
-  {
-    id: 8,
-    name: "Strawberry Pretzel",
-    price: 4.99,
-    category: "Pretzel",
-  },
-  {
-    id: 9,
-    name: "Butter Pecan Ice Cream",
-    price: 2.99,
-    category: "Ice Cream",
-  },
-  {
-    id: 10,
-    name: "Rocky Road Ice Cream",
-    price: 2.99,
-    category: "Ice Cream",
-  },
-  {
-    id: 11,
-    name: "Vanilla Macarons (5 Pack)",
-    price: 11.99,
-    category: "Macaron",
-  },
-  {
-    id: 12,
-    name: "Lemon Cupcakes (4 Pack)",
-    price: 12.99,
-    category: "Cupcake",
-  },
-];
+const proportionalSize = (size) => {
+  return innerHeight < 500 ? Math.ceil((size / 500) * innerHeight) : size;
+};
 
-products.forEach(({ name, id, price, category }) => {
-  dessertCards.innerHTML += `
-      <div class="dessert-card">
-        <h2>${name}</h2>
-        <p class="dessert-price">$${price}</p>
-        <p class="product-category">Category: ${category}</p>
-        <button 
-          id="${id}" 
-          class="btn add-to-cart-btn">Add to cart
-        </button>
-      </div>
-    `;
-});
-
-class ShoppingCart {
+class Player {
   constructor() {
-    this.items = [];
-    this.total = 0;
-    this.taxRate = 8.25;
+    this.position = {
+      x: proportionalSize(10),
+      y: proportionalSize(400),
+    };
+    this.velocity = {
+      x: 0,
+      y: 0,
+    };
+    this.width = proportionalSize(40);
+    this.height = proportionalSize(40);
+  }
+  draw() {
+    ctx.fillStyle = "#99c9ff";
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
-  addItem(id, products) {
-    const product = products.find((item) => item.id === id);
-    const { name, price } = product;
-    this.items.push(product);
+  update() {
+    this.draw();
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
 
-    const totalCountPerProduct = {};
-    this.items.forEach((dessert) => {
-      totalCountPerProduct[dessert.id] =
-        (totalCountPerProduct[dessert.id] || 0) + 1;
-    });
-
-    const currentProductCount = totalCountPerProduct[product.id];
-    const currentProductCountSpan = document.getElementById(
-      `product-count-for-id${id}`
-    );
-
-    currentProductCount > 1
-      ? (currentProductCountSpan.textContent = `${currentProductCount}x`)
-      : (productsContainer.innerHTML += `
-      <div id="dessert${id}" class="product">
-        <p>
-          <span class="product-count" id="product-count-for-id${id}"></span>${name}
-        </p>
-        <p>${price}</p>
-      </div>
-      `);
-  }
-
-  getCounts() {
-    return this.items.length;
-  }
-
-  clearCart() {
-    if (!this.items.length) {
-      alert("Your shopping cart is already empty");
-      return;
+    if (this.position.y + this.height + this.velocity.y <= canvas.height) {
+      if (this.position.y < 0) {
+        this.position.y = 0;
+        this.velocity.y = gravity;
+      }
+      this.velocity.y += gravity;
+    } else {
+      this.velocity.y = 0;
     }
 
-    const isCartCleared = confirm(
-      "Are you sure you want to clear all items from your shopping cart?"
-    );
-
-    if (isCartCleared) {
-      this.items = [];
-      this.total = 0;
-      productsContainer.innerHTML = "";
-      totalNumberOfItems.textContent = 0;
-      cartSubTotal.textContent = 0;
-      cartTaxes.textContent = 0;
-      cartTotal.textContent = 0;
+    if (this.position.x < this.width) {
+      this.position.x = this.width;
     }
-  }
 
-  calculateTaxes(amount) {
-    return parseFloat(((this.taxRate / 100) * amount).toFixed(2));
-  }
-
-  calculateTotal() {
-    const subTotal = this.items.reduce((total, item) => total + item.price, 0);
-    const tax = this.calculateTaxes(subTotal);
-    this.total = subTotal + tax;
-    cartSubTotal.textContent = `$${subTotal.toFixed(2)}`;
-    cartTaxes.textContent = `$${tax.toFixed(2)}`;
-    cartTotal.textContent = `$${this.total.toFixed(2)}`;
-    return this.total;
+    if (this.position.x >= canvas.width - this.width * 2) {
+      this.position.x = canvas.width - this.width * 2;
+    }
   }
 }
 
-const cart = new ShoppingCart();
-const addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
+const player = new Player();
 
-[...addToCartBtns].forEach((btn) => {
-  btn.addEventListener("click", (event) => {
-    cart.addItem(Number(event.target.id), products);
-    totalNumberOfItems.textContent = cart.getCounts();
-    cart.calculateTotal();
-  });
+const animate = () => {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  player.update();
+
+  if (keys.rightKey.pressed && player.position.x < proportionalSize(400)) {
+    player.velocity.x = 5;
+  } else if (
+    keys.leftKey.pressed &&
+    player.position.x > proportionalSize(100)
+  ) {
+    player.velocity.x = -5;
+  } else {
+    player.velocity.x = 0;
+  }
+};
+
+const keys = {
+  rightKey: {
+    pressed: false,
+  },
+  leftKey: {
+    pressed: false,
+  },
+};
+
+const movePlayer = (key, xVelocity, isPressed) => {
+  if (!isCheckpointCollisionDetectionActive) {
+    player.velocity.x = 0;
+    player.velocity.y = 0;
+    return;
+  }
+
+  switch (key) {
+    case "ArrowLeft":
+      keys.leftKey.pressed = isPressed;
+      if (xVelocity === 0) {
+        player.velocity.x = xVelocity;
+      }
+      player.velocity.x -= xVelocity;
+      break;
+    case "ArrowUp":
+    case " ":
+    case "Spacebar":
+      player.velocity.y -= 8;
+      break;
+    case "ArrowRight":
+      keys.rightKey.pressed = isPressed;
+      if (xVelocity === 0) {
+        player.velocity.x = xVelocity;
+      }
+      player.velocity.x += xVelocity;
+  }
+};
+
+const startGame = () => {
+  canvas.style.display = "block";
+  startScreen.style.display = "none";
+  animate();
+};
+
+startBtn.addEventListener("click", startGame);
+
+window.addEventListener("keydown", ({ key }) => {
+  movePlayer(key, 8, true);
 });
 
-cartBtn.addEventListener("click", () => {
-  isCartShowing = !isCartShowing;
-  showHideCartSpan.textContent = isCartShowing ? "Hide" : "Show";
-  cartContainer.style.display = isCartShowing ? "block" : "none";
+window.addEventListener("keyup", ({ key }) => {
+  movePlayer(key, 0, false);
 });
-
-clearCartBtn.addEventListener("click", cart.clearCart.bind(cart));
