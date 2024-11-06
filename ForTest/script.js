@@ -141,6 +141,7 @@ const animate = () => {
 
   if (keys.rightKey.pressed && player.position.x < proportionalSize(400)) {
     player.velocity.x = 5;
+    console.log(player.velocity.x);
   } else if (
     keys.leftKey.pressed &&
     player.position.x > proportionalSize(100)
@@ -249,14 +250,17 @@ const movePlayer = (key, xVelocity, isPressed) => {
         player.velocity.x = xVelocity;
       }
       player.velocity.x -= xVelocity;
+
       break;
     case "ArrowUp":
     case " ":
     case "Spacebar":
-      player.velocity.y -= 8;
+      player.velocity.y -= xVelocity;
+
       break;
     case "ArrowRight":
       keys.rightKey.pressed = isPressed;
+
       if (xVelocity === 0) {
         player.velocity.x = xVelocity;
       }
