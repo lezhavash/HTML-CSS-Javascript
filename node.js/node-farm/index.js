@@ -52,10 +52,10 @@ const templateProduct = fs.readFileSync(
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObject = JSON.parse(data);
 const server = http.createServer((req, res) => {
-  const { query, pathName } = url.parse(req.url, true);
+  const { query, pathname } = url.parse(req.url, true);
 
   //Overview
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, {
       "content-type": "text/html",
     });
@@ -67,16 +67,16 @@ const server = http.createServer((req, res) => {
     res.end(output);
 
     //Product Page
-  } else if (pathName === "/product") {
+  } else if (pathname === "/product") {
     res.writeHead(200, {
       "content-type": "text/html",
     });
-    const product = dataObj[query.id];
+    const product = dataObject[query.id];
     const output = replaceTemplate(templateProduct, product);
-    res.end("This is an product");
+    res.end(output);
 
     //API
-  } else if (pathName === "/api") {
+  } else if (pathname === "/api") {
     res.writeHead(200, {
       "content-type": "application/json",
     });
