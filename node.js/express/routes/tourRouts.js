@@ -2,10 +2,23 @@ const express = require('express');
 const tourController = require('./../controllers/tourController.js');
 
 const router = express.Router();
+
+router.param('id', tourController.checkID);
+
+const checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'Fail',
+      message: 'Invalid ID',
+    });
+  }
+  next();
+};
+
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.createTour);
+  .post(checkBody, tourController.createTour);
 router
   .route('/:id')
   .get(tourController.getTour)
