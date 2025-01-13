@@ -5,15 +5,52 @@ const tourSchema = new mongoose.Schema({
     type: String,
     required: [true, 'You Mast have Name'],
     unique: true,
+    trim: true,
   },
-  rating: {
+  duration: {
+    type: Number,
+    required: [true, 'You mast have Duration'],
+  },
+  maxGroupSize: {
+    type: Number,
+    required: [true, 'You mast have GroupSize'],
+  },
+  difficulty: {
+    type: String,
+    required: [true, 'You mast have Difficulty'],
+  },
+  ratingsAvarage: {
     type: Number,
     default: 4.5,
+  },
+  ratingQuantity: {
+    type: Number,
+    default: 0,
   },
   price: {
     type: Number,
     required: [true, 'You mast have Price'],
   },
+  priceDiscount: Number,
+  summary: {
+    type: String,
+    trim: true,
+    required: [true, 'You mast have Description'],
+  },
+  description: {
+    type: String,
+    trim: true,
+  },
+  imageCover: {
+    type: String,
+    required: [true, 'You mast have Image'],
+  },
+  images: [String],
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  startDates: [Date],
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
