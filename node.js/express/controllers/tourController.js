@@ -3,7 +3,7 @@ const Tour = require('./../models/tourModel.js');
 exports.getAllTours = async (req, res) => {
   try {
     const queryObj = { ...req.query };
-    const exludedFields = ['page', 'sort'];
+    const exludedFields = ['page', 'sort', 'limit', 'fields'];
 
     const tours = await Tour.find();
     res.status(200).json({
