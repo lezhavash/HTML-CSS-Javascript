@@ -1,22 +1,37 @@
 const Tour = require('./../models/tourModel.js');
 
-exports.getAllTours = (req, res) => {
-  res.status(200).json({
-    status: 'seccess',
-    data: {
-      tours: 'test',
-    },
-  });
+exports.getAllTours = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+    res.status(200).json({
+      status: 'seccess',
+      data: {
+        tours,
+      },
+    });
+  } catch (err) {
+    res.starus(404).json({
+      status: 'faild',
+      message: err,
+    });
+  }
 };
 
-exports.getTour = (req, res) => {
-  const id = req.params.id * 1;
-  res.status(200).json({
-    status: 'seccess',
-    data: {
-      tour: 'test',
-    },
-  });
+exports.getTour = async (req, res) => {
+  try {
+    const tour = await Tour.findById(req.params.id);
+    res.status(200).json({
+      status: 'seccess',
+      data: {
+        tour,
+      },
+    });
+  } catch (err) {
+    res.starus(404).json({
+      status: 'faild',
+      message: err,
+    });
+  }
 };
 
 exports.createTour = async (req, res) => {
@@ -29,7 +44,6 @@ exports.createTour = async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json({
       status: 'fail',
       data: {
@@ -39,7 +53,20 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.updateTour = (req, res) => {
+exports.updateTour = async (req, res) => {
+  try {
+    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      status: 'seccess',
+      data: {
+        tour,
+      },
+    });
+  } catch (err) {}
+
   res.status(200).json({
     status: 'seccess',
     data: {
@@ -48,11 +75,19 @@ exports.updateTour = (req, res) => {
   });
 };
 
-exports.delateTour = (req, res) => {
-  res.status(204).json({
-    status: 'seccess',
-    data: {
-      tour: 'Deleted',
-    },
-  });
+exports.delateTour = async (req, res) => {
+  try {
+    await Tour.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'seccess',
+      data: null,
+    });
+  } catch (err) {
+    res.starus(404).json({
+      status: 'fail',
+      data: {
+        message: err,
+      },
+    });
+  }
 };
