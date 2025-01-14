@@ -1,36 +1,81 @@
 const Tour = require('./../models/tourModel.js');
 
-exports.getAllTours = async (req, res) => {
-  try {
-    //1) Filtering
-    const queryObj = { ...req.query };
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = 'price,-ratingAvarage';
+  req.query.fields = 'name,price,ratingAvarage,summary,difficulty';
+  next();
+};
+
+class APIFeatures {
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
+
+  filter() {
+    const queryObj = { ...this.queryString };
     const exludedFields = ['page', 'sort', 'limit', 'fields'];
     exludedFields.forEach((el) => delete queryObj[el]);
 
-    //2) Advanced Filtering
+    // Advanced Filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
-    let query = Tour.find(JSON.parse(queryStr));
+    this.query = this.query.find(JSON.parse(queryStr));
+    return this;
+  }
 
-    //Sorting
-    if (req.query.sort) {
-      const soirtBy = req.query.soirt.split(',').json(' ');
-      query = query.sort(soirtBy);
+  sort() {
+    if (this.queryString.sort) {
+      const sortBy = this.queryString.sort.split(',').join(' ');
+      this.query = this.query.sort(sortBy);
     } else {
-      query = query.soirt('createdAt');
+      this.query = this.query.sort('createdAt');
     }
+    return this;
+  }
 
-    const tours = await query;
+  limitFields() {
+    if (this.queryString.fields) {
+      const fields = this.queryString.fields.split(',').join(' ');
+      this.query = this.query.select(fields);
+    } else {
+      this.query = this.query.select('-__v');
+    }
+    return this;
+  }
+  paginate() {
+    const page = this.queryString.page * 1 || 1;
+    const limit = this.queryString.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+    this.query = this.query.skip(skip).limit(limit);
+
+    return this;
+  }
+}
+
+exports.getAllTours = async (req, res) => {
+  try {
+    const features = new APIFeatures(Tour.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const tours = await features.query;
 
     res.status(200).json({
       status: 'seccess',
+      results: tours.length,
       data: {
         tours,
       },
     });
   } catch (err) {
-    res.starus(404).json({
+    console.log(err);
+
+    res.status(404).json({
       status: 'faild',
       message: err,
     });

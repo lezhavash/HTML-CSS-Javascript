@@ -4,6 +4,10 @@ const tourController = require('./../controllers/tourController.js');
 const router = express.Router();
 
 router
+  .route('/top-5-cheap')
+  .get(tourController.aliasTopTours, tourController.getAllTours);
+
+router
   .route('/')
   .get(tourController.getAllTours)
   .post(tourController.createTour);
@@ -14,9 +18,3 @@ router
   .delete(tourController.delateTour);
 
 module.exports = router;
-
-// app.get('/api/v1/tours', getAllTours);
-// app.post('/api/v1/tours', createTour);
-// app.get('/api/v1/tours/:id', getTour);
-// app.patch('/api/v1/tours/:id', updateTour);
-// app.delete('/api/v1/tours/:id', delateTour);
