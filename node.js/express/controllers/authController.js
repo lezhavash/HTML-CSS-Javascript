@@ -59,9 +59,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('You are note logged In!', 401));
   }
 
-  const decoded = await promisify(jwt.verify)(token, protect.env.JWT_SECRET);
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  console.log(decoded);
+  const freshUser = await User.findByid(decoded.id);
+  if (!freshUser) {
+    return next(new AppError('The User do not exist with this token', 401));
+  }
 
   next();
 });

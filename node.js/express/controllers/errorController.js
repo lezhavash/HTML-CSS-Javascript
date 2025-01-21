@@ -16,6 +16,9 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+const handleJWTError = () =>
+  new AppError('Invalid Token, Please login again', 401);
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -52,5 +55,10 @@ module.exports = (err, req, res, next) => {
     if (err.code === 11000) error = hendlDuplicateFieldsDB(error);
     if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
     sendErrorProd(error, res);
+    if (
+      error.name === 'JsonWebTokenError' ||
+      error.name === 'TokenExpiredError'
+    )
+      error = handleJWTError();
   }
 };
