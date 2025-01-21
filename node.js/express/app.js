@@ -7,6 +7,10 @@ const tourRouter = require('./routes/tourRouts.js');
 const userRouter = require('./routes/userRouts.js');
 
 const app = express();
+// app.use((req, res, next) => {
+//   console.log(req.headers);
+//   next();
+// });
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
