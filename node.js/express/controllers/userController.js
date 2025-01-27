@@ -1,5 +1,17 @@
 const User = require('../models/userModel');
+const { use } = require('../routes/tourRouts');
+const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) {
+      newObj[el] = obj[el];
+    }
+  });
+  return newObj;
+};
 
 exports.getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
@@ -19,6 +31,25 @@ exports.createUser = (req, res) => {
     message: 'Test',
   });
 };
+
+exports.updateMe = catchAsync(async (req, res, next) => {
+  if (req.body.password || req.body.passwordConform) {
+    return next(new AppError('You can not update password', 401));
+  }
+
+  const filterBody = filterObj(req.body, 'name', 'email');
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
+    new: true,
+    runValidators: true,
+  });
+
+  req.status(200).json({
+    status: 'seccess',
+    data: {
+      user: updatedUser,
+    },
+  });
+});
 
 exports.getUsers = (req, res) => {
   res.status(500).json({
