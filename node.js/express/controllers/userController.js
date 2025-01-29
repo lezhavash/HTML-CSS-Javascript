@@ -43,11 +43,20 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
-  req.status(200).json({
+  res.status(200).json({
     status: 'seccess',
     data: {
       user: updatedUser,
     },
+  });
+});
+
+exports.delateMe = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.user.id, { active: false });
+
+  res.status(204).json({
+    status: 'seccess',
+    data: null,
   });
 });
 
