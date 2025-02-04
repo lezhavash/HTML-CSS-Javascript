@@ -44,7 +44,7 @@ app.use(
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
-aap.use('/api/v1/review', reviewRouter);
+app.use('/api/v1/review', reviewRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can not Find ${req.originalUrl} on this server!`, 404));
