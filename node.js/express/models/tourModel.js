@@ -95,7 +95,7 @@ const tourSchema = new mongoose.Schema(
     ],
     guides: [
       {
-        type: mongoose.Schema.ObjectID,
+        type: mongoose.Schema.ObjectId,
         ref: 'User',
       },
     ],
@@ -108,6 +108,14 @@ const tourSchema = new mongoose.Schema(
 
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
+});
+
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
+  next();
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
