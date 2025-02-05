@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./../controllers/userController.js');
 const authController = require('./../controllers/authController.js');
+const reviewController = require('./../controllers/reviewController.js');
 
 const router = express.Router();
 
@@ -27,5 +28,13 @@ router
   .get(userController.getUsers)
   .patch(userController.updateUser)
   .delete(userController.delateUser);
+
+router
+  .route('/:tourId/veviews')
+  .post(
+    authController.protect,
+    authController.restrictTo('user'),
+    reviewController.createReview,
+  );
 
 module.exports = router;
