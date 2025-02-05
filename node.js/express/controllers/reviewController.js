@@ -3,7 +3,10 @@ const catchAsync = require('./../utils/catchAsync.js');
 const AppError = require('./../utils/appError.js');
 
 exports.getAllReview = catchAsync(async (req, res, next) => {
-  const review = await Review.find();
+  let filter = {};
+  if (req.params.tourId) filter = { tour: req.params.tourId };
+
+  const review = await Review.find(filter);
   res.status(201).json({
     status: 'seccess',
     data: {
