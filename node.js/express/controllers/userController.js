@@ -1,7 +1,12 @@
 const User = require('../models/userModel');
-const { use } = require('../routes/tourRouts');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const factory = require('./handlerFactory.js');
+
+exports.getAllUsers = factory.getAll(User);
+exports.getUsers = factory.getOne(User);
+exports.updateUser = factory.updateOne(User);
+exports.delateUser = factory.delateOne(User);
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -13,22 +18,10 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-exports.getAllUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'seccess',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
-
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'Test',
+    message: 'This rout is not defined! Please use /signup instead',
   });
 };
 
@@ -59,24 +52,3 @@ exports.delateMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-
-exports.getUsers = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Test',
-  });
-};
-
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Test',
-  });
-};
-
-exports.delateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'Test',
-  });
-};
