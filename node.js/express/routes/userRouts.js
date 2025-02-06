@@ -10,6 +10,7 @@ router.post('/login', authController.login);
 router.post('/forgotpassword', authController.forgotPassword);
 router.patch('/resetpassword/:token', authController.resetPassword);
 
+// Protect Rout
 router.use(authController.protect);
 
 router.patch('/updatemypassword', authController.updatePassword);
@@ -18,6 +19,8 @@ router.get('/me', userController.getMe, userController.getUsers);
 router.patch('/updateme', userController.updateMe);
 router.delete('/delateme', userController.delateMe);
 
+//Only for Admins
+router.use(authController.restrictTo('admin'));
 router
   .route('/')
   .get(userController.getAllUsers)
