@@ -4,6 +4,7 @@ const catchAsync = require('./../utils/catchAsync.js');
 const AppError = require('./../utils/appError.js');
 
 exports.setTourUserIds = (req, res, next) => {
+  console.log('Request Params:', req.params);
   if (!req.body.tour) req.body.tour = req.params.tourId;
   if (!req.body.user) req.body.user = req.user.id;
   next();

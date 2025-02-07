@@ -2,7 +2,7 @@ const express = require('express');
 const reviewController = require('./../controllers/reviewController.js');
 const authController = require('./../controllers/authController.js');
 
-const router = express.Router({ margeParams: true });
+const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 router
