@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -13,10 +14,8 @@ const userRouter = require('./routes/userRouts.js');
 const reviewRouter = require('./routes/reviewRouts.js');
 
 const app = express();
-// app.use((req, res, next) => {
-//   console.log(req.headers);
-//   next();
-// });
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -41,6 +40,10 @@ app.use(
     whitelist: ['duration', 'price'],
   }),
 );
+
+app.get('/', (req, res) => {
+  res.status(200).render('base');
+});
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
