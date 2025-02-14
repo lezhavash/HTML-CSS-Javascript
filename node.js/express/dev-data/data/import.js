@@ -1,10 +1,12 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config({ path: `./config.env` });
+dotenv.config({ path: `${__dirname}/../../config.env` });
 const Tour = require('./../../models/tourModel.js');
 const User = require('./../../models/userModel.js');
 const Review = require('./../../models/reviewModel.js');
+
+console.log(`${__dirname}/../../config.env`);
 
 if (!process.env.DATABASE || !process.env.DATABASE_PASSWORD) {
   throw new Error(
@@ -18,9 +20,7 @@ const DB = process.env.DATABASE.replace(
 );
 mongoose
   .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    // useNewUrlParser: true,
   })
   .then((con) => {
     console.log('DB Connected');
