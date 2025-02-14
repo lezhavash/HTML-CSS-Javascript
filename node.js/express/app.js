@@ -12,6 +12,9 @@ const globalErrorHandler = require('./controllers/errorController.js');
 const tourRouter = require('./routes/tourRouts.js');
 const userRouter = require('./routes/userRouts.js');
 const reviewRouter = require('./routes/reviewRouts.js');
+const viewRouter = require('./routes/viewRoutes.js');
+
+const { title } = require('process');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -41,13 +44,7 @@ app.use(
   }),
 );
 
-app.get('/', (req, res) => {
-  res.status(200).render('base', {
-    tour: 'The forest hicker',
-    user: 'Jonas',
-  });
-});
-
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/review', reviewRouter);

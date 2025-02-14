@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const slugify = require('slugify');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -11,6 +12,7 @@ const tourSchema = new mongoose.Schema(
       maxlength: [40, 'A tour Name must have less or equal 40 characters'],
       minlength: [10, 'A tour Name must have more or equal 10 characters'],
     },
+    slug: String,
     duration: {
       type: Number,
       required: [true, 'You mast have Duration'],
@@ -119,6 +121,11 @@ tourSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'tour',
   localField: '_id',
+});
+
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 tourSchema.pre(/^find/, function (next) {
