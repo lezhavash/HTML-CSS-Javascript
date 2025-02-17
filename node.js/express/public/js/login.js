@@ -1,17 +1,34 @@
-const login = async (email, passwor) => {
-  const res = await axios({
-    method: 'POST',
-    url: 'http://127.0.0.1/api/v1/users/login',
-    data: {
-      email,
-      passwor,
-    },
-  });
-  console.log(res);
+import { showAlert } from './alerts.js';
+
+export const login = async (email, password) => {
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: 'http://127.0.0.1:3000/api/v1/users/login',
+      data: {
+        email,
+        password,
+      },
+    });
+    if (res.data.status === 'success') {
+      showAlert('success', 'Loggen is Successfully');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
 };
 
-document.querySelector('.form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-});
+export const logout = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: 'http://127.0.0.1:3000/api/v1/users/logout',
+    });
+    if (res.data.status === 'success') location.reload(true);
+  } catch (err) {
+    showAlert('error', '!!!!!!!!!!!');
+  }
+};

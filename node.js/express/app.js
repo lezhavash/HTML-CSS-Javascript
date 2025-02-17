@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
-
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError.js');
 const globalErrorHandler = require('./controllers/errorController.js');
@@ -13,8 +13,6 @@ const tourRouter = require('./routes/tourRouts.js');
 const userRouter = require('./routes/userRouts.js');
 const reviewRouter = require('./routes/reviewRouts.js');
 const viewRouter = require('./routes/viewRoutes.js');
-
-const { title } = require('process');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -35,6 +33,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 app.use(mongoSanitize());
 
