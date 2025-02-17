@@ -19,27 +19,48 @@ const handleValidationErrorDB = (err) => {
 const handleJWTError = () =>
   new AppError('Invalid Token, Please login again', 401);
 
-const sendErrorDev = (err, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    messsage: err.message,
-    error: err,
-    stack: err.stack,
-  });
-};
-
-const sendErrorProd = (err, res) => {
-  if (err.isOperational) {
+const sendErrorDev = (err, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
     res.status(err.statusCode).json({
       status: err.status,
       messsage: err.message,
+      error: err,
+      stack: err.stack,
     });
   } else {
-    console.error('ERROR', err);
-    res.status(500).json({
-      status: 'error',
-      messsage: 'Internal Error',
+    res.status(err.statusCode).render('error', {
+      title: 'Something went wrong!',
+      msg: err.message,
     });
+  }
+};
+
+const sendErrorProd = (err, req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    if (err.isOperational) {
+      res.status(err.statusCode).json({
+        status: err.status,
+        messsage: err.message,
+      });
+    } else {
+      console.error('ERROR', err);
+      res.status(500).json({
+        status: 'error',
+        messsage: 'Internal Error',
+      });
+    }
+  } else {
+    if (err.isOperational) {
+      res.status(err.statusCode).render('error', {
+        title: 'Something went wrong!',
+        msg: err.message,
+      });
+    } else {
+      res.status(err.statusCode).render('error', {
+        title: 'Something went wrong!',
+        msg: 'Please Try again Later',
+      });
+    }
   }
 };
 
@@ -48,13 +69,14 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || 'error';
 
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, res);
+    sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
+    error.message = err.message;
     if (err.name === 'CastError') error = hendleCastErrorDB(error);
     if (err.code === 11000) error = hendlDuplicateFieldsDB(error);
     if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
-    sendErrorProd(error, res);
+    sendErrorProd(error, req, res);
     if (
       error.name === 'JsonWebTokenError' ||
       error.name === 'TokenExpiredError'
