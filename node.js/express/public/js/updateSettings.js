@@ -1,5 +1,4 @@
 import { showAlert } from './alerts.js';
-
 export const updateSettings = async (data, type) => {
   try {
     const url =
