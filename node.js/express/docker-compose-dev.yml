@@ -11,3 +11,7 @@ services:
       - '3000:3000'
     env_file:
       - ./config.env
+  mongo:
+    image: mongo
+    env_file:
+      - ./config.env
