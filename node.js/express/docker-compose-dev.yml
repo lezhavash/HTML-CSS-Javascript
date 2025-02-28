@@ -1,8 +1,8 @@
 services:
   node-app:
     build:
-      dockerfile: Dockerfile.dev
       context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
       - ./:/app
@@ -11,7 +11,18 @@ services:
       - '3000:3000'
     env_file:
       - ./config.env
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo
+    restart: always
     env_file:
       - ./config.env
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-data:

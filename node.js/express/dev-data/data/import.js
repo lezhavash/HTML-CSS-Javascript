@@ -8,22 +8,17 @@ const Review = require('./../../models/reviewModel.js');
 
 console.log(`${__dirname}/../../config.env`);
 
-if (!process.env.DATABASE || !process.env.DATABASE_PASSWORD) {
-  throw new Error(
-    'Environment variables DATABASE or DATABASE_PASSWORD are missing.',
-  );
-}
+const DB = process.env.DATABASE;
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD,
-);
 mongoose
   .connect(DB, {
-    // useNewUrlParser: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .then((con) => {
-    console.log('DB Connected');
+  .then(() => console.log('✅ MongoDB Connected Successfully!'))
+  .catch((err) => {
+    console.error('❌ MongoDB Connection Error:', err);
+    process.exit(1);
   });
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));

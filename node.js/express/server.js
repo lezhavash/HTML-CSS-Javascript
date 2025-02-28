@@ -9,17 +9,18 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD,
-);
+// Connect to MongoDB
+const DB = process.env.DATABASE;
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((con) => {
-    console.log('DB Connected');
+  .then(() => console.log('✅ MongoDB Connected Successfully!'))
+  .catch((err) => {
+    console.error('❌ MongoDB Connection Error:', err);
+    process.exit(1);
   });
 
 const port = process.env.PORT;
