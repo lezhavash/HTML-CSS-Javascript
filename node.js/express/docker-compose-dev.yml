@@ -1,16 +1,16 @@
 services:
   node-app:
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
-      - ./:/app
+      - ./app:/app
     command: npm run dev
     ports:
-      - '3000:3000'
+      - "3000:3000"
     env_file:
-      - ./config.env
+      - ./app/config.env
     depends_on:
       - mongo
 
@@ -18,7 +18,7 @@ services:
     image: mongo
     restart: always
     env_file:
-      - ./config.env
+      - ./app/config.env
     volumes:
       - mongo-data:/data/db
 
