@@ -72,12 +72,14 @@ function Menu() {
     <main className="menu">
       <h2>Ouer Menu</h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We Do net Heve!</p>
       )}
 
       {/* <Pizza
@@ -97,6 +99,8 @@ function Menu() {
 }
 
 function Pizza(props) {
+  if (props.pizzaObj.soldOut) return null;
+
   return (
     <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}></img>
@@ -116,13 +120,17 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closeHour;
   return (
     <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          <p>We`re ophen until {closeHour}:00</p>
-          <button className="btn">Order</button>
-        </div>
-      )}
+      {isOpen ? <Order closeHour={closeHour} /> : null}
     </footer>
+  );
+}
+
+function Order(props) {
+  return (
+    <div className="order">
+      <p>We`re ophen until {props.closeHour}:00</p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
